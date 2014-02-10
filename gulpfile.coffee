@@ -22,6 +22,8 @@ EXPRESS_PORT = 4000
 startExpress = ->
 	app = express()
 	app.use connectLivereload()
+	app.get '/phonegap.js', (req, res) -> res.sendfile './lib/phonegap-desktop.js'
+	app.get '/debugdata.json', (req, res) -> res.sendfile './lib/debugdata.json'
 	app.use express.static path.join __dirname, BUILD_FOLDER
 	app.listen EXPRESS_PORT
 
