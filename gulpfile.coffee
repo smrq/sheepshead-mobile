@@ -2,6 +2,7 @@ browserify = require 'gulp-browserify'
 coffee = require 'gulp-coffee'
 concat = require 'gulp-concat'
 connectLivereload = require 'connect-livereload'
+exec = require 'gulp-exec'
 express = require 'express'
 fixSourceMaps = require 'gulp-fix-windows-source-maps'
 gulp = require 'gulp'
@@ -69,5 +70,13 @@ gulp.task 'browse', ['watch'], ->
 	startExpress()
 	gulp.src './src/index.jade'
 		.pipe open '', url: "http://localhost:#{EXPRESS_PORT}/index.html"
+
+gulp.task 'run-android', ['build'], ->
+	gulp.src './src/index.jade'
+		.pipe exec 'pushd phonegap-build && phonegap run android && popd'
+
+gulp.task 'run-ios', ['build'], ->
+	gulp.src './src/index.jade'
+		.pipe exec 'pushd phonegap-build && phonegap run ios && popd'
 
 gulp.task 'default', ['build']
