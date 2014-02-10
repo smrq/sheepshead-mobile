@@ -8,6 +8,11 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "angular": "~1.2.12"
+    "angular": "~1.2.12",
+    "phonegap-desktop": "https://github.com/jxp/phonegap-desktop.git",
+    "angular-route": "~1.2.12",
+    "angular-animate": "~1.2.12",
+    "bootstrap": "~3.1.0",
+    "angular-bootstrap": "~0.10.0"
   }
 }

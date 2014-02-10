@@ -1,27 +1,17 @@
 angular = require 'angular'
+require 'angular-animate'
+require 'angular-bootstrap'
+require 'angular-route'
 
-m = angular.module 'app', []
-m.controller 'TestCtrl', ($scope) ->
-	$scope.readyText = 'Device is Ready'
+m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
+	($routeProvider, $locationProvider) ->
+		$routeProvider.when '/',
+			templateUrl: 'scoreList.html'
+			controller: 'ScoreListCtrl'
+		$locationProvider.html5Mode true
 
-app =
-	initialize: ->
-		@bindEvents()
+m.controller 'ScoreListCtrl', ($scope) ->
+	$scope.scores = {}
 
-	bindEvents: ->
-		document.addEventListener 'deviceready', @onDeviceReady, false
-
-	onDeviceReady: ->
-		app.receivedEvent 'deviceready'
-
-	receivedEvent: (id) ->
-		parentElement = document.getElementById id
-		listeningElement = parentElement.querySelector '.listening'
-		receivedElement = parentElement.querySelector '.received'
-
-		listeningElement.setAttribute 'style', 'display:none;'
-		receivedElement.setAttribute 'style', 'display:block;'
-
-		console.log 'Received Event: ' + id
-
-app.initialize()
+#document.addEventListener 'deviceready', ->
+#	angular.bootstrap document, ['app']

@@ -22,8 +22,8 @@ EXPRESS_PORT = 4000
 startExpress = ->
 	app = express()
 	app.use connectLivereload()
-	app.get '/phonegap.js', (req, res) -> res.sendfile './lib/phonegap-desktop.js'
-	app.get '/debugdata.json', (req, res) -> res.sendfile './lib/debugdata.json'
+	app.get '/phonegap.js', (req, res) -> res.sendfile './bower_components/phonegap-desktop/js/phonegap-desktop.js'
+	app.get '/debugdata.json', (req, res) -> res.sendfile './bower_components/phonegap-desktop/debugdata.json'
 	app.use express.static path.join __dirname, BUILD_FOLDER
 	app.listen EXPRESS_PORT
 
@@ -39,8 +39,17 @@ scripts = ->
 		transform: ['coffeeify']
 		extensions: ['.coffee']
 		shim:
-			angular:
+			'angular':
 				path: 'bower_components/angular/angular.js'
+				exports: 'angular'
+			'angular-animate':
+				path: 'bower_components/angular-animate/angular-animate.js'
+				exports: 'angular'
+			'angular-bootstrap':
+				path: 'bower_components/angular-bootstrap/ui-bootstrap.js'
+				exports: 'angular'
+			'angular-route':
+				path: 'bower_components/angular-route/angular-route.js'
 				exports: 'angular'
 
 	gulp.src './src/index.coffee', read: false
@@ -71,7 +80,7 @@ gulp.task 'watch', ['build'], ->
 gulp.task 'browse', ['watch'], ->
 	startExpress()
 	gulp.src './src/index.jade'
-		.pipe open '', url: "http://localhost:#{EXPRESS_PORT}/index.html"
+		.pipe open '', url: "http://localhost:#{EXPRESS_PORT}/"
 
 gulp.task 'run-android', ['build'], ->
 	gulp.src './src/index.jade'
