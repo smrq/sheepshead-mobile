@@ -38,10 +38,10 @@ scripts = ->
 		debug: true
 		transform: ['coffeeify']
 		extensions: ['.coffee']
-		#shim:
-		#	angular:
-		#		path: 'bower_components/angular/angular.js'
-		#		exports: 'angular'
+		shim:
+			angular:
+				path: 'bower_components/angular/angular.js'
+				exports: 'angular'
 
 	gulp.src './src/index.coffee', read: false
 		.pipe browserify(browserifyOpts).on 'error', gutil.log

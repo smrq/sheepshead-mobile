@@ -1,3 +1,9 @@
+angular = require 'angular'
+
+m = angular.module 'app', []
+m.controller 'TestCtrl', ($scope) ->
+	$scope.readyText = 'Device is Ready'
+
 app =
 	initialize: ->
 		@bindEvents()

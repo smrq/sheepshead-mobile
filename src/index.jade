@@ -8,12 +8,12 @@ html
         // build:styles
         // endbuild
         title Hello World
-    body
-        .app
+    body(ng-app="app")
+        .app(ng-controller="TestCtrl")
             h1 PhoneGap
             #deviceready.blink
                 .event.listening Connecting to Device
-                .event.received Device is Ready
+                .event.received {{readyText}}
         script(type="text/javascript" src="phonegap.js")
         // build:scripts
         // endbuild

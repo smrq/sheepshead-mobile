@@ -8,6 +8,7 @@
   "license": "MIT",
   "homepage": "https://github.com/smrq/sheepshead-mobile",
   "devDependencies": {
+    "bower": "~1.2.8",
     "coffeeify": "~0.6.0",
     "connect-livereload": "~0.3.2",
     "debowerify": "~0.5.2",
@@ -16,6 +17,7 @@
     "gulp-browserify": "~0.4.4",
     "gulp-coffee": "~1.4.1",
     "gulp-concat": "~2.1.7",
+    "gulp-exec": "~1.0.4",
     "gulp-fix-windows-source-maps": "~0.1.0",
     "gulp-html-replace": "~0.2.0",
     "gulp-jade": "~0.4.1",
@@ -25,7 +27,6 @@
     "gulp-rename": "~1.0.0",
     "gulp-util": "~2.2.14",
     "gulp-watch": "~0.5.0",
-    "underscore": "~1.5.2",
-    "gulp-exec": "~1.0.4"
+    "underscore": "~1.5.2"
   }
 }

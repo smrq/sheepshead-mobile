@@ -1,0 +1,13 @@
+{
+  "name": "sheepshead-mobile",
+  "version": "0.0.0",
+  "homepage": "https://github.com/smrq/sheepshead-mobile",
+  "authors": [
+    "Greg Smith <smr.kyu@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "angular": "~1.2.12"
+  }
+}
