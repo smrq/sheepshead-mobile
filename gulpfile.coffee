@@ -91,15 +91,15 @@ gulp.task 'watch', ['build'], ->
 
 gulp.task 'browse', ['watch'], ->
 	startExpress()
-	gulp.src ANY_GLOB
+	gulp.src MAIN_SCRIPT
 		.pipe open '', url: "http://localhost:#{EXPRESS_PORT}/"
 
 gulp.task 'run-android', ['build'], ->
-	gulp.src ANY_GLOB
+	gulp.src MAIN_SCRIPT
 		.pipe exec 'pushd phonegap-build && phonegap run android && popd'
 
 gulp.task 'run-ios', ['build'], ->
-	gulp.src ANY_GLOB
+	gulp.src MAIN_SCRIPT
 		.pipe exec 'pushd phonegap-build && phonegap run ios && popd'
 
 gulp.task 'default', ['build']
