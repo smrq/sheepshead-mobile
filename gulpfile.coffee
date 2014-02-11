@@ -18,12 +18,11 @@ watch = require 'gulp-watch'
 
 BUILD_FOLDER = './phonegap-build/www/'
 EXPRESS_PORT = 4000
-ANY_GLOB =     'src/*'
-CONTENT_GLOB = 'src/**/*.png'
-STYLES_GLOB =  'src/*.less'
-SCRIPTS_GLOB = 'src/*.coffee'
-MARKUP_GLOB =  'src/*.jade'
-MAIN_SCRIPT =  'src/index.coffee'
+CONTENT_GLOB = 'src/res/*'
+STYLES_GLOB =  'src/styles/*.less'
+SCRIPTS_GLOB = 'src/scripts/*.coffee'
+MARKUP_GLOB =  'src/markup/*.jade'
+MAIN_SCRIPT =  'src/scripts/index.coffee'
 
 startExpress = ->
 	app = express()

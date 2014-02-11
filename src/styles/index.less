@@ -4,7 +4,7 @@ body {
     -webkit-touch-callout: none;    // prevent callout to copy image, etc when tap to hold
     -webkit-text-size-adjust: none; // prevent webkit from resizing text to fit
     -webkit-user-select: none;      // prevent copy paste, to allow, change 'none' to 'text'
-    padding-top: @navbar-height + 5px;
+    overflow: hidden;
 }
 
 .title {
@@ -22,7 +22,7 @@ body {
 .score-list {
 	padding-bottom: @navbar-height;
 	.table {
-		td, th { text-align: center; line-height: 2; vertical-align: baseline; }
+		td, th { text-align: center; vertical-align: baseline; }
 
 		.col-doubler { padding: 0; }
 		.col-score { width: 13.5%; }
@@ -88,6 +88,10 @@ body {
 .content {
 	width: 100%;
 	position: absolute;
+	top: @navbar-height;
+	bottom: 0;
+	overflow-y: auto;
+	padding-top: 10px;
 }
 .content.ng-enter,
 .content.ng-leave {
