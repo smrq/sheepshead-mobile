@@ -27,12 +27,20 @@ startExpress = ->
 	app.use express.static path.join __dirname, BUILD_FOLDER
 	app.listen EXPRESS_PORT
 
+CONTENT_GLOB = 'src/**/*.png'
+content = ->
+	gulp.src CONTENT_GLOB
+		.pipe gulp.dest BUILD_FOLDER
+
+STYLES_GLOB = 'src/*.less'
 styles = ->
-	gulp.src 'src/*.less'
+	gulp.src STYLES_GLOB
 		.pipe less()
 		.pipe concat 'bundle.css'
 		.pipe gulp.dest BUILD_FOLDER
 
+SCRIPTS_GLOB = './src/*.coffee'
+MAIN_SCRIPT = './src/index.coffee'
 scripts = ->
 	browserifyOpts =
 		debug: true
@@ -52,42 +60,45 @@ scripts = ->
 				path: 'bower_components/angular-route/angular-route.js'
 				exports: 'angular'
 
-	gulp.src './src/index.coffee', read: false
+	gulp.src MAIN_SCRIPT, read: false
 		.pipe browserify(browserifyOpts).on 'error', gutil.log
 		.pipe rename 'bundle.js'
 		.pipe fixSourceMaps()
 		.pipe gulp.dest BUILD_FOLDER
 
+MARKUP_GLOB = './src/*.jade'
 markup = ->
-	gulp.src './src/*.jade'
+	gulp.src MARKUP_GLOB
 		.pipe jade pretty: true
 		.pipe htmlreplace
 			styles: 'bundle.css'
 			scripts: 'bundle.js'
 		.pipe gulp.dest BUILD_FOLDER
 
+gulp.task 'content', content
 gulp.task 'styles', styles
 gulp.task 'scripts', scripts
 gulp.task 'markup', markup
-gulp.task 'build', ['styles', 'scripts', 'markup']
+gulp.task 'build', ['content', 'styles', 'scripts', 'markup']
 
 gulp.task 'watch', ['build'], ->
 	livereload()
-	gulp.watch './src/*.less', -> styles().pipe livereload()
-	gulp.watch './src/*.coffee', -> scripts().pipe livereload()
-	gulp.watch './src/*.jade', -> markup().pipe livereload()
+	gulp.watch CONTENT_GLOB, -> content().pipe livereload()
+	gulp.watch STYLES_GLOB,  -> styles().pipe  livereload()
+	gulp.watch SCRIPTS_GLOB, -> scripts().pipe livereload()
+	gulp.watch MARKUP_GLOB,  -> markup().pipe  livereload()
 
 gulp.task 'browse', ['watch'], ->
 	startExpress()
-	gulp.src './src/index.jade'
+	gulp.src './src/*'
 		.pipe open '', url: "http://localhost:#{EXPRESS_PORT}/"
 
 gulp.task 'run-android', ['build'], ->
-	gulp.src './src/index.jade'
+	gulp.src './src/*'
 		.pipe exec 'pushd phonegap-build && phonegap run android && popd'
 
 gulp.task 'run-ios', ['build'], ->
-	gulp.src './src/index.jade'
+	gulp.src './src/*'
 		.pipe exec 'pushd phonegap-build && phonegap run ios && popd'
 
 gulp.task 'default', ['build']
