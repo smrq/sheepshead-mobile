@@ -39,7 +39,7 @@ content = ->
 
 styles = ->
 	gulp.src STYLES_GLOB
-		.pipe less()
+		.pipe less().on 'error', gutil.log
 		.pipe concat 'bundle.css'
 		.pipe gulp.dest BUILD_FOLDER
 
@@ -70,7 +70,7 @@ scripts = ->
 
 markup = ->
 	gulp.src MARKUP_GLOB
-		.pipe jade pretty: true
+		.pipe jade(pretty: true).on 'error', gutil.log
 		.pipe htmlreplace
 			styles: 'bundle.css'
 			scripts: 'bundle.js'
