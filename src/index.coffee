@@ -1,4 +1,5 @@
 angular = require 'angular'
+_ = require 'underscore'
 require 'angular-animate'
 require 'angular-bootstrap'
 require 'angular-route'
@@ -11,6 +12,9 @@ m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
 		$locationProvider.html5Mode true
 
 m.controller 'ScoreListCtrl', ($scope) ->
+	$scope.addScore = ->
+		console.log 'addScore()'
+
 	$scope.players = [
 		player: "Rebecca Vance"
 		playerAbbreviation: "RV"
@@ -44,7 +48,7 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value:  0, wasPicker: false, wasPartner: false, wasOut: true,  wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value: 2,  wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
+			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
 	,
 		wasNotSet: false
@@ -57,7 +61,7 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  3, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -4, wasPicker: false, wasPartner: true,  wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: true , wasLeaster: false, wasMisplay: false }
-			{ value: 2,  wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
+			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
 	,
 		wasNotSet: true
@@ -70,7 +74,7 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  3, wasPicker: true,  wasPartner: true,  wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -4, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value: 2,  wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
+			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
 	,
 		wasNotSet: false
@@ -83,7 +87,7 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  3, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -4, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value: 2,  wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
+			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
 	,
 		wasNotSet: false
@@ -96,7 +100,7 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  3, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: true,  wasMisplay: false }
 			{ value: -4, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value: 2,  wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
+			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
 	,
 		wasNotSet: false
@@ -109,6 +113,10 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  30, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: true,  wasMisplay: false }
 			{ value: -40, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -10, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value: 20,  wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
+			{ value:  20, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
 	]
+	for h in $scope.hands
+		$scope.hands.push _.extend {}, h
+	for h in $scope.hands
+		$scope.hands.push _.extend {}, h

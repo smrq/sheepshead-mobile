@@ -1,20 +1,25 @@
-table.table.table-condensed.score-list
-	tr
-		th.col-doubler
-		th(ng-repeat="player in players")
-			| {{player.playerAbbreviation}}
+.score-list
+	table.table.table-condensed
+		tr
+			th.col-doubler
+			th(ng-repeat="player in players")
+				| {{player.playerAbbreviation}}
 
-	tr(
-		ng-repeat="hand in hands"
-		ng-class="{set: hand.wasSet, 'not-set': hand.wasNotSet}")
-		td(ng-class="{doubler: hand.wasDoubler, leaster: hand.wasLeaster}")
-		td(
-			ng-repeat="score in hand.scores"
-			ng-class="{                    \
-				partner: score.wasPartner, \
-				picker: score.wasPicker,   \
-				out: score.wasOut,         \
-				leaster: score.wasLeaster, \
-				misplay: score.wasMisplay  \
-			}")
-			| {{score.wasOut ? '–' : score.value}}
+		tr(
+			ng-repeat="hand in hands"
+			ng-class="{set: hand.wasSet, 'not-set': hand.wasNotSet}")
+			td.col-doubler(ng-class="{doubler: hand.wasDoubler, leaster: hand.wasLeaster}")
+			td(
+				ng-repeat="score in hand.scores"
+				ng-class="{                    \
+					partner: score.wasPartner, \
+					picker: score.wasPicker,   \
+					out: score.wasOut,         \
+					leaster: score.wasLeaster, \
+					misplay: score.wasMisplay  \
+				}")
+				| {{score.wasOut ? '–' : score.value}}
+
+nav.navbar.navbar-default.navbar-fixed-bottom
+	.container
+		button.btn.btn-primary.navbar-btn(ng-click="addScore()") Add another score

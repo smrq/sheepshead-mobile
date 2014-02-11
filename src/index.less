@@ -4,18 +4,10 @@ body {
     -webkit-touch-callout: none;    // prevent callout to copy image, etc when tap to hold
     -webkit-text-size-adjust: none; // prevent webkit from resizing text to fit
     -webkit-user-select: none;      // prevent copy paste, to allow, change 'none' to 'text'
-    height:100%;
-    margin:0px;
-    padding:0px;
-    width:100%;
+    padding-top: @navbar-height + 20px;
 }
 
 .title {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: 0;
-	margin: 0;
 	text-align: center;
 	line-height: @navbar-height;
 	height: @navbar-height;
@@ -24,22 +16,18 @@ body {
 	--webkit-user-select: none;
 	--webkit-user-drag: none;
 	--webkit-tap-highlight-color: rgba(0,0,0,0);
-	background-color: #1169a6;
+	background-color: @brand-primary;
 	color: white;
 	font-weight: bold;
 	font-size: @font-size-large;
 }
-.content {
-	position: absolute;
-	left: 0;
-	right: 0;
-	top: @navbar-height
-}
 
 .score-list {
+	padding-bottom: @navbar-height;
+
 	td, th { text-align: center; line-height: 2; }
 
-	.col-doubler { width: 25px; }
+	.col-doubler { padding: 0; }
 
 	.set { color: @brand-danger; }
 	.not-set { color: @brand-success; }
@@ -57,10 +45,14 @@ body {
 		&:after { content: "P×"; vertical-align: super; font-size: 75%; position: absolute; }
 	}
 
-	.doubler:before {
-		content: "D";
-		color: black;
-		font-weight: bold;
+	.doubler {
+		padding: @table-condensed-cell-padding;
+		width: 1em;
+		&:before {
+			content: "D";
+			color: black;
+			font-weight: bold;
+		}
 	}
 
 	.leaster {
