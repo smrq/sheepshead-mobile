@@ -24,6 +24,10 @@ body {
 	--webkit-user-select: none;
 	--webkit-user-drag: none;
 	--webkit-tap-highlight-color: rgba(0,0,0,0);
+	background-color: #1169a6;
+	color: white;
+	font-weight: bold;
+	font-size: @font-size-large;
 }
 .content {
 	position: absolute;
@@ -33,15 +37,25 @@ body {
 }
 
 .score-list {
-	td, th { text-align: center; }
+	td, th { text-align: center; line-height: 2; }
 
-	.col-doubler-leaster { width: 25px; }
+	.col-doubler { width: 25px; }
 
 	.set { color: @brand-danger; }
 	.not-set { color: @brand-success; }
 
-	.partner { text-decoration: underline; }
-	.picker { font-weight: bold; }
+	.picker {
+		font-weight: bold;
+		&:after { content: "P"; vertical-align: super; font-size: 75%; position: absolute; }
+	}
+	.partner {
+		&:after { content: "×"; vertical-align: super; font-size: 75%; position: absolute; }
+	}
+
+	.picker.partner {
+		font-weight: bold;
+		&:after { content: "P×"; vertical-align: super; font-size: 75%; position: absolute; }
+	}
 
 	.doubler:before {
 		content: "D";
@@ -49,14 +63,22 @@ body {
 		font-weight: bold;
 	}
 
-	.leaster:before {
-		content: "L";
-		color: black;
+	.leaster {
 		font-weight: bold;
+		&:after { content: "L"; vertical-align: super; font-size: 75%; position: absolute; }
 	}
 
-	.out:before {
-		content: "–";
-		color: black;
+	.misplay {
+		font-weight: bold;
+		&:after { content: "MP"; vertical-align: super; font-size: 75%; position: absolute; }
+	}
+
+	.out {
+		color: transparent;
+		&:before {
+			position: absolute;
+			content: "–";
+			color: black;
+		}
 	}
 }

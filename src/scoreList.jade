@@ -1,25 +1,20 @@
 table.table.table-condensed.score-list
 	tr
-		th.col-doubler-leaster
-		th J
-		th G
-		th E
-		th B
-		th X
-		th Q
-	tr.not-set
-		td
-		td.partner 1
-		td.picker 2
-		td -1
-		td -1
-		td.out
-		td -1
-	tr.set
-		td.doubler
-		td 3
-		td 4
-		td.picker -5
-		td 1
-		td.partner -2
-		td.out
+		th.col-doubler
+		th(ng-repeat="player in players")
+			| {{player.playerAbbreviation}}
+
+	tr(
+		ng-repeat="hand in hands"
+		ng-class="{set: hand.wasSet, 'not-set': hand.wasNotSet}")
+		td(ng-class="{doubler: hand.wasDoubler, leaster: hand.wasLeaster}")
+		td(
+			ng-repeat="score in hand.scores"
+			ng-class="{\
+				partner: score.wasPartner,\
+				picker: score.wasPicker,\
+				out: score.wasOut,\
+				leaster: score.wasLeaster,\
+				misplay: score.wasMisplay\
+			}")
+			| {{score.value}}

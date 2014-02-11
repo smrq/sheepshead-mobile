@@ -1,30 +1,11 @@
 
 <table class="table table-condensed score-list">
   <tr>
-    <th class="col-doubler-leaster"></th>
-    <th>J</th>
-    <th>G</th>
-    <th>E</th>
-    <th>B</th>
-    <th>X</th>
-    <th>Q</th>
+    <th class="col-doubler"></th>
+    <th ng-repeat="player in players">{{player.playerAbbreviation}}</th>
   </tr>
-  <tr class="not-set">
-    <td></td>
-    <td class="partner">1</td>
-    <td class="picker">2</td>
-    <td>-1</td>
-    <td>-1</td>
-    <td class="out"></td>
-    <td>-1</td>
-  </tr>
-  <tr class="set">
-    <td class="doubler"></td>
-    <td>3</td>
-    <td>4</td>
-    <td class="picker">-5</td>
-    <td>1</td>
-    <td class="partner">-2</td>
-    <td class="out"></td>
+  <tr ng-repeat="hand in hands" ng-class="{set: hand.wasSet, 'not-set': hand.wasNotSet}">
+    <td ng-class="{doubler: hand.wasDoubler, leaster: hand.wasLeaster}"></td>
+    <td ng-repeat="score in hand.scores" ng-class="{				partner: score.wasPartner,				picker: score.wasPicker,				out: score.wasOut,				leaster: score.wasLeaster,				misplay: score.wasMisplay			}">{{score.value}}</td>
   </tr>
 </table>

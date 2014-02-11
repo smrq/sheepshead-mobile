@@ -5213,6 +5213,10 @@ body {
   --webkit-user-select: none;
   --webkit-user-drag: none;
   --webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  background-color: #1169a6;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
 }
 .content {
   position: absolute;
@@ -5223,8 +5227,9 @@ body {
 .score-list td,
 .score-list th {
   text-align: center;
+  line-height: 2;
 }
-.score-list .col-doubler-leaster {
+.score-list .col-doubler {
   width: 25px;
 }
 .score-list .set {
@@ -5233,23 +5238,58 @@ body {
 .score-list .not-set {
   color: #5cb85c;
 }
-.score-list .partner {
-  text-decoration: underline;
-}
 .score-list .picker {
   font-weight: bold;
+}
+.score-list .picker:after {
+  content: "P";
+  vertical-align: super;
+  font-size: 75%;
+  position: absolute;
+}
+.score-list .partner:after {
+  content: "×";
+  vertical-align: super;
+  font-size: 75%;
+  position: absolute;
+}
+.score-list .picker.partner {
+  font-weight: bold;
+}
+.score-list .picker.partner:after {
+  content: "P×";
+  vertical-align: super;
+  font-size: 75%;
+  position: absolute;
 }
 .score-list .doubler:before {
   content: "D";
   color: black;
   font-weight: bold;
 }
-.score-list .leaster:before {
-  content: "L";
-  color: black;
+.score-list .leaster {
   font-weight: bold;
 }
+.score-list .leaster:after {
+  content: "L";
+  vertical-align: super;
+  font-size: 75%;
+  position: absolute;
+}
+.score-list .misplay {
+  font-weight: bold;
+}
+.score-list .misplay:after {
+  content: "MP";
+  vertical-align: super;
+  font-size: 75%;
+  position: absolute;
+}
+.score-list .out {
+  color: transparent;
+}
 .score-list .out:before {
+  position: absolute;
   content: "–";
   color: black;
 }
