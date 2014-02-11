@@ -4,6 +4,7 @@
 			th.col-doubler
 			th(ng-repeat="player in players")
 				| {{player.playerAbbreviation}}
+			th.point-spread PS
 
 		tr(
 			ng-repeat="hand in hands"
@@ -19,6 +20,7 @@
 					misplay: score.wasMisplay  \
 				}")
 				| {{score.wasOut ? '–' : score.value}}
+			td.point-spread {{ hand.pointSpread }}
 
 nav.navbar.navbar-default.navbar-fixed-bottom
 	.container

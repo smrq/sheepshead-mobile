@@ -33,9 +33,6 @@ m.controller 'ScoreListCtrl', ($scope) ->
 	,
 		player: "Tracy Mueller"
 		playerAbbreviation: "TM"
-	,
-		player: "Point Spread"
-		playerAbbreviation: "PS"
 	]
 	$scope.hands = [
 		wasNotSet: true
@@ -48,8 +45,8 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value:  0, wasPicker: false, wasPartner: false, wasOut: true,  wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
+		pointSpread: 2
 	,
 		wasNotSet: false
 		wasSet: true
@@ -61,8 +58,8 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  3, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -4, wasPicker: false, wasPartner: true,  wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: true , wasLeaster: false, wasMisplay: false }
-			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
+		pointSpread: 2
 	,
 		wasNotSet: true
 		wasSet: false
@@ -74,8 +71,8 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  3, wasPicker: true,  wasPartner: true,  wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -4, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
+		pointSpread: 2
 	,
 		wasNotSet: false
 		wasSet: false
@@ -87,8 +84,8 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  3, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -4, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
+		pointSpread: 2
 	,
 		wasNotSet: false
 		wasSet: false
@@ -100,8 +97,8 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  3, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: true,  wasMisplay: false }
 			{ value: -4, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -1, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value:  2, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
+		pointSpread: 2
 	,
 		wasNotSet: false
 		wasSet: false
@@ -113,8 +110,8 @@ m.controller 'ScoreListCtrl', ($scope) ->
 			{ value:  30, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: true,  wasMisplay: false }
 			{ value: -40, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 			{ value: -10, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
-			{ value:  20, wasPicker: false, wasPartner: false, wasOut: false, wasLeaster: false, wasMisplay: false }
 		]
+		pointSpread: 2
 	]
 	for h in $scope.hands
 		$scope.hands.push _.extend {}, h

@@ -24,48 +24,53 @@ body {
 
 .score-list {
 	padding-bottom: @navbar-height;
+	.table {
+		td, th { text-align: center; line-height: 2; vertical-align: baseline; }
 
-	td, th { text-align: center; line-height: 2; }
+		.col-doubler { padding: 0; }
 
-	.col-doubler { padding: 0; }
+		.set { color: @brand-danger; }
+		.not-set { color: @brand-success; }
 
-	.set { color: @brand-danger; }
-	.not-set { color: @brand-success; }
-
-	.picker {
-		font-weight: bold;
-		&:after { content: "P"; vertical-align: super; font-size: 75%; position: absolute; }
-	}
-	.partner {
-		&:after { content: "×"; vertical-align: super; font-size: 75%; position: absolute; }
-	}
-
-	.picker.partner {
-		font-weight: bold;
-		&:after { content: "P×"; vertical-align: super; font-size: 75%; position: absolute; }
-	}
-
-	.doubler {
-		padding: @table-condensed-cell-padding;
-		width: 1em;
-		&:before {
-			content: "D";
-			color: black;
+		.picker {
 			font-weight: bold;
+			&:after { content: "P"; vertical-align: super; font-size: 75%; position: absolute; }
 		}
-	}
+		.partner {
+			&:after { content: "×"; vertical-align: super; font-size: 75%; position: absolute; }
+		}
 
-	.leaster {
-		font-weight: bold;
-		&:after { content: "L"; vertical-align: super; font-size: 75%; position: absolute; }
-	}
+		.picker.partner {
+			font-weight: bold;
+			&:after { content: "P×"; vertical-align: super; font-size: 75%; position: absolute; }
+		}
 
-	.misplay {
-		font-weight: bold;
-		&:after { content: "MP"; vertical-align: super; font-size: 75%; position: absolute; }
-	}
+		.doubler {
+			padding: @table-condensed-cell-padding;
+			width: 1em;
+			&:before {
+				content: "D";
+				color: black;
+				font-weight: bold;
+			}
+		}
 
-	.out {
-		color: black;
+		.leaster {
+			font-weight: bold;
+			&:after { content: "L"; vertical-align: super; font-size: 75%; position: absolute; }
+		}
+
+		.misplay {
+			font-weight: bold;
+			&:after { content: "MP"; vertical-align: super; font-size: 75%; position: absolute; }
+		}
+
+		.out {
+			color: black;
+		}
+
+		.point-spread {
+			font-size: 75%;
+		}
 	}
 }
