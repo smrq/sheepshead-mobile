@@ -1,3 +1,5 @@
+_ = require 'underscore'
+
 module.exports = (m) ->
 	m.controller 'ScoreListCtrl', ($scope) ->
 		$scope.addScore = ->
