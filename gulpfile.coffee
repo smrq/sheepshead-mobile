@@ -18,6 +18,12 @@ watch = require 'gulp-watch'
 
 BUILD_FOLDER = './phonegap-build/www/'
 EXPRESS_PORT = 4000
+ANY_GLOB =     'src/*'
+CONTENT_GLOB = 'src/**/*.png'
+STYLES_GLOB =  'src/*.less'
+SCRIPTS_GLOB = 'src/*.coffee'
+MARKUP_GLOB =  'src/*.jade'
+MAIN_SCRIPT =  'src/index.coffee'
 
 startExpress = ->
 	app = express()
@@ -27,20 +33,16 @@ startExpress = ->
 	app.use express.static path.join __dirname, BUILD_FOLDER
 	app.listen EXPRESS_PORT
 
-CONTENT_GLOB = 'src/**/*.png'
 content = ->
 	gulp.src CONTENT_GLOB
 		.pipe gulp.dest BUILD_FOLDER
 
-STYLES_GLOB = 'src/*.less'
 styles = ->
 	gulp.src STYLES_GLOB
 		.pipe less()
 		.pipe concat 'bundle.css'
 		.pipe gulp.dest BUILD_FOLDER
 
-SCRIPTS_GLOB = './src/*.coffee'
-MAIN_SCRIPT = './src/index.coffee'
 scripts = ->
 	browserifyOpts =
 		debug: true
@@ -66,7 +68,6 @@ scripts = ->
 		.pipe fixSourceMaps()
 		.pipe gulp.dest BUILD_FOLDER
 
-MARKUP_GLOB = './src/*.jade'
 markup = ->
 	gulp.src MARKUP_GLOB
 		.pipe jade pretty: true
@@ -90,15 +91,15 @@ gulp.task 'watch', ['build'], ->
 
 gulp.task 'browse', ['watch'], ->
 	startExpress()
-	gulp.src './src/*'
+	gulp.src ANY_GLOB
 		.pipe open '', url: "http://localhost:#{EXPRESS_PORT}/"
 
 gulp.task 'run-android', ['build'], ->
-	gulp.src './src/*'
+	gulp.src ANY_GLOB
 		.pipe exec 'pushd phonegap-build && phonegap run android && popd'
 
 gulp.task 'run-ios', ['build'], ->
-	gulp.src './src/*'
+	gulp.src ANY_GLOB
 		.pipe exec 'pushd phonegap-build && phonegap run ios && popd'
 
 gulp.task 'default', ['build']
