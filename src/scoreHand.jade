@@ -1,0 +1,8 @@
+.score-hand
+	.player(ng-repeat="player in players")
+		.name {{player.player}}
+		.buttons
+			.btn-group
+				button.btn(ng-model="player.wasPicker" btn-checkbox ng-class="{'btn-primary': player.wasPicker}") P
+				button.btn(ng-model="player.wasPartner" btn-checkbox ng-class="{'btn-primary': player.wasPartner}") ∗
+			button.btn(ng-model="player.wasOut" btn-checkbox ng-class="{'btn-primary': player.wasOut}") Out

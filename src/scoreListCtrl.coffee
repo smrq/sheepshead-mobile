@@ -1,9 +1,9 @@
 _ = require 'underscore'
 
 module.exports = (m) ->
-	m.controller 'ScoreListCtrl', ($scope) ->
+	m.controller 'ScoreListCtrl', ($scope, $location) ->
 		$scope.addScore = ->
-			console.log 'addScore()'
+			$location.path '/scoreHand'
 
 		$scope.players = [
 			player: "Rebecca Vance"
