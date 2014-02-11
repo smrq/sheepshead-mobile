@@ -10,11 +10,11 @@ table.table.table-condensed.score-list
 		td(ng-class="{doubler: hand.wasDoubler, leaster: hand.wasLeaster}")
 		td(
 			ng-repeat="score in hand.scores"
-			ng-class="{\
-				partner: score.wasPartner,\
-				picker: score.wasPicker,\
-				out: score.wasOut,\
-				leaster: score.wasLeaster,\
-				misplay: score.wasMisplay\
+			ng-class="{                    \
+				partner: score.wasPartner, \
+				picker: score.wasPicker,   \
+				out: score.wasOut,         \
+				leaster: score.wasLeaster, \
+				misplay: score.wasMisplay  \
 			}")
-			| {{score.value}}
+			| {{score.wasOut ? '–' : score.value}}
