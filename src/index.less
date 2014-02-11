@@ -4,7 +4,7 @@ body {
     -webkit-touch-callout: none;    // prevent callout to copy image, etc when tap to hold
     -webkit-text-size-adjust: none; // prevent webkit from resizing text to fit
     -webkit-user-select: none;      // prevent copy paste, to allow, change 'none' to 'text'
-    padding-top: @navbar-height + 20px;
+    padding-top: @navbar-height + 5px;
 }
 
 .title {
@@ -28,6 +28,7 @@ body {
 		td, th { text-align: center; line-height: 2; vertical-align: baseline; }
 
 		.col-doubler { padding: 0; }
+		.col-score { width: 13.5%; }
 
 		.set { color: @brand-danger; }
 		.not-set { color: @brand-success; }
@@ -47,7 +48,7 @@ body {
 
 		.doubler {
 			padding: @table-condensed-cell-padding;
-			width: 1em;
+			width: 7.5%;
 			&:before {
 				content: "D";
 				color: black;
