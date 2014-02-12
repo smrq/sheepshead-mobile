@@ -1,8 +1,19 @@
 .score-hand
+	.top-buttons
+		button.btn(ng-model="wasDoubler" btn-checkbox ng-class="{'btn-primary': wasDoubler}") Doubler
+		button.btn(ng-model="wasLeaster" btn-checkbox ng-class="{'btn-primary': wasLeaster}") Leaster
+		button.btn(ng-model="wasMisplay" btn-checkbox ng-class="{'btn-primary': wasMisplay}") Misplay
 	.player(ng-repeat="player in players")
 		.name {{player.player}}
-		.buttons
+		.buttons(ng-show="wasNormalGame()")
 			.btn-group
 				button.btn(ng-model="player.wasPicker" btn-checkbox ng-class="{'btn-primary': player.wasPicker}") P
 				button.btn(ng-model="player.wasPartner" btn-checkbox ng-class="{'btn-primary': player.wasPartner}") ∗
 			button.btn(ng-model="player.wasOut" btn-checkbox ng-class="{'btn-primary': player.wasOut}") Out
+		.buttons(ng-show="wasLeaster")
+			button.btn(ng-model="player.wasLeaster" btn-checkbox ng-class="{'btn-primary': player.wasLeaster}") won this hand
+		.buttons(ng-show="wasMisplay")
+			button.btn(ng-model="player.wasMisplay" btn-checkbox ng-class="{'btn-danger': player.wasMisplay}") done fucked up
+
+nav.navbar.navbar-default.navbar-fixed-bottom: .container
+	button.btn.btn-primary.navbar-btn(ng-click="submitScore()" ng-disabled="!canSubmit()") Score this hand

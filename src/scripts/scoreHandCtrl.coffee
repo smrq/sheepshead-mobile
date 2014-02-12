@@ -1,5 +1,10 @@
+_ = require 'underscore'
+
 module.exports = (m) ->
 	m.controller 'ScoreHandCtrl', ($scope) ->
+		$scope.wasDoubler = false
+		$scope.wasLeaster = false
+		$scope.wasMisplay = false
 		$scope.players = [
 			player: "Rebecca Vance"
 			playerAbbreviation: "RV"
@@ -37,3 +42,18 @@ module.exports = (m) ->
 			wasPartner: false
 			wasOut: false
 		]
+
+		$scope.wasNormalGame = ->
+			not $scope.wasLeaster and not $scope.wasMisplay
+		$scope.canSubmitNormalGame = ->
+			_.filter($scope.players, (p) -> p.wasPicker).length is 1 and
+			_.filter($scope.players, (p) -> p.wasPartner).length is 1 and
+			_.filter($scope.players, (p) -> p.wasOut).length is 1
+		$scope.canSubmitLeaster = ->
+			_.filter($scope.players, (p) -> p.wasLeaster).length is 1
+		$scope.canSubmitMisplay = ->
+			_.filter($scope.players, (p) -> p.wasMisplay).length is 1
+		$scope.canSubmit = ->
+			$scope.wasNormalGame() and $scope.canSubmitNormalGame() or
+			$scope.wasLeaster and $scope.canSubmitLeaster() or
+			$scope.wasMisplay and $scope.canSubmitMisplay()
