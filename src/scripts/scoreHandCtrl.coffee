@@ -46,9 +46,14 @@ module.exports = (m) ->
 		$scope.wasNormalGame = ->
 			not $scope.wasLeaster and not $scope.wasMisplay
 		$scope.canSubmitNormalGame = ->
-			_.filter($scope.players, (p) -> p.wasPicker).length is 1 and
-			_.filter($scope.players, (p) -> p.wasPartner).length is 1 and
-			_.filter($scope.players, (p) -> p.wasOut).length is 1
+			picker = _.filter $scope.players, (p) -> p.wasPicker
+			partner = _.filter $scope.players, (p) -> p.wasPartner
+			out = _.filter $scope.players, (p) -> p.wasOut
+			picker.length is 1 and
+			partner.length is 1 and
+			out.length is 1 and
+			picker[0] isnt out[0] and
+			partner[0] isnt out[0]
 		$scope.canSubmitLeaster = ->
 			_.filter($scope.players, (p) -> p.wasLeaster).length is 1
 		$scope.canSubmitMisplay = ->
@@ -57,3 +62,8 @@ module.exports = (m) ->
 			$scope.wasNormalGame() and $scope.canSubmitNormalGame() or
 			$scope.wasLeaster and $scope.canSubmitLeaster() or
 			$scope.wasMisplay and $scope.canSubmitMisplay()
+
+		$scope.$watch 'wasLeaster', (wasLeaster) ->
+			$scope.wasMisplay = false if wasLeaster
+		$scope.$watch 'wasMisplay', (wasMisplay) ->
+			$scope.wasLeaster = false if wasMisplay
