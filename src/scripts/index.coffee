@@ -1,7 +1,11 @@
 angular = require 'angular'
+attachFastclick = require('fastclick');
+
 require 'angular-animate'
 require 'angular-bootstrap'
 require 'angular-route'
+
+attachFastclick document.body
 
 m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
 	($routeProvider, $locationProvider) ->

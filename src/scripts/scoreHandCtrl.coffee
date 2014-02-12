@@ -1,7 +1,7 @@
 _ = require 'underscore'
 
 module.exports = (m) ->
-	m.controller 'ScoreHandCtrl', ($scope) ->
+	m.controller 'ScoreHandCtrl', ($scope, $location) ->
 		$scope.wasDoubler = false
 		$scope.wasLeaster = false
 		$scope.wasMisplay = false
@@ -62,6 +62,9 @@ module.exports = (m) ->
 			$scope.wasNormalGame() and $scope.canSubmitNormalGame() or
 			$scope.wasLeaster and $scope.canSubmitLeaster() or
 			$scope.wasMisplay and $scope.canSubmitMisplay()
+
+		$scope.submitScore = ->
+			$location.path '/'
 
 		$scope.$watch 'wasLeaster', (wasLeaster) ->
 			$scope.wasMisplay = false if wasLeaster
