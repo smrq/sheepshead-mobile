@@ -1,0 +1,25 @@
+{
+	"folders": [
+		{
+			"follow_symlinks": true,
+			"path": "."
+		}
+	],
+	"build_systems": [
+		{
+			"shell": true,
+			"name": "Gulp [Browse]",
+			"cmd": ["gulp", "browse"]
+		},
+		{
+			"shell": true,
+			"name": "Gulp [Android]",
+			"cmd": ["gulp", "run-android"]
+		},
+		{
+			"shell": true,
+			"name": "Gulp [iOS]",
+			"cmd": ["gulp", "run-ios"]
+		},
+	]
+}
