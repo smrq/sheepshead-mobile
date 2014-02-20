@@ -1,7 +1,7 @@
 _ = require 'underscore'
 
 module.exports = (m) ->
-	m.controller 'ScoreHandCtrl', ($scope, $location, scoreKeeperService) ->
+	m.controller 'ScoreHandCtrl', ($scope, screenService, scoreKeeperService) ->
 		$scope.handInfo =
 			whoWasOut: null
 			wasMisplay: false
@@ -114,7 +114,7 @@ module.exports = (m) ->
 		$scope.submitScore = ->
 			finalize $scope.handInfo
 			scoreKeeperService.scoreHand $scope.handInfo
-			$location.path '/scoreList'
+			screenService.pop()
 
 		finalize = (handInfo) ->
 			if handInfo.wasLeaster or handInfo.wasMisplay

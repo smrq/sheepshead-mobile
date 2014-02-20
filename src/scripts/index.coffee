@@ -25,7 +25,9 @@ m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
 require('./selectPlayersCtrl')(m)
 require('./scoreListCtrl')(m)
 require('./scoreHandCtrl')(m)
+
 require('./scoreKeeperService')(m)
+require('./screenService')(m)
 require('./webService')(m)
 
 document.addEventListener "deviceready", ->
