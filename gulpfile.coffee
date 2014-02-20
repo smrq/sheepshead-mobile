@@ -97,12 +97,12 @@ gulp.task 'browse', ['watch'], ->
 	gulp.src MAIN_SCRIPT
 		.pipe open '', url: "http://localhost:#{EXPRESS_PORT}/"
 
-gulp.task 'run-android', ['build'], ->
-	gulp.src MAIN_SCRIPT
-		.pipe exec 'pushd phonegap-build && phonegap run android && popd'
+phonegapCommand = (cmd) ->
+	exec "pushd phonegap-build && phonegap #{cmd} && popd"
 
-gulp.task 'run-ios', ['build'], ->
-	gulp.src MAIN_SCRIPT
-		.pipe exec 'pushd phonegap-build && phonegap run ios && popd'
+gulp.task 'build-android', ['build'], -> gulp.src(MAIN_SCRIPT).pipe phonegapCommand 'build android'
+gulp.task 'run-android', ['build'], -> gulp.src(MAIN_SCRIPT).pipe phonegapCommand 'run android'
+gulp.task 'build-ios', ['build'], -> gulp.src(MAIN_SCRIPT).pipe phonegapCommand 'build ios'
+gulp.task 'run-ios', ['build'], -> gulp.src(MAIN_SCRIPT).pipe phonegapCommand 'run ios'
 
 gulp.task 'default', ['build']
