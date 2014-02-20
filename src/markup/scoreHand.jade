@@ -18,7 +18,7 @@
 			button.btn.player-misplay-out(ng-click="toggleOut(player.name)" ng-class="{'toggled': player.name === handInfo.whoWasOut}") Out
 	.score-buttons(ng-show="wasNormalGame()")
 		button.btn.set-button(ng-click="toggleSet()" ng-class="{'toggled': handInfo.wasSet}")
-			{{handInfo.wasSet ? 'Set' : 'Win'}}
+			| {{handInfo.wasSet ? 'Set' : 'Win'}}
 		.btn-group
 			button.btn.score-button(ng-click="setSchneider()" ng-class="{'toggled': wasSchneider(), 'set': handInfo.wasSet}") Schneider
 			button.btn.score-button(ng-click="setNoSchneider()" ng-class="{'toggled': handInfo.wasNoSchneider, 'set': handInfo.wasSet}") No Schneider
