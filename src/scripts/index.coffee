@@ -26,6 +26,7 @@ require('./selectPlayersCtrl')(m)
 require('./scoreListCtrl')(m)
 require('./scoreHandCtrl')(m)
 require('./scoreKeeperService')(m)
+require('./webService')(m)
 
 document.addEventListener "deviceready", ->
 	angular.bootstrap document, ['app']
