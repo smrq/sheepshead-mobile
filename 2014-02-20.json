@@ -1,0 +1,376 @@
+{
+	"players":[
+		{"name":"Jacob Buysse","abbreviation":"JB"},
+		{"name":"Blake Adams","abbreviation":"BA"},
+		{"name":"Ben Dixon","abbreviation":"BD"},
+		{"name":"Greg Smith","abbreviation":"GS"},
+		{"name":"Ezra McNichols","abbreviation":"EM"},
+		{"name":"Tracy Mueller","abbreviation":"TM"}
+	],
+	"hands":[
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Blake Adams":{"dValue":2, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":2},
+				"Ben Dixon":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":0},
+				"Greg Smith":{"dValue":1, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1},
+				"Ezra McNichols":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Tracy Mueller":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1}
+			},
+			"pointSpread":3,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-4, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-5},
+				"Blake Adams":{"dValue":4, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":6},
+				"Ben Dixon":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":0},
+				"Greg Smith":{"dValue":-8, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-7},
+				"Ezra McNichols":{"dValue":4, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":3},
+				"Tracy Mueller":{"dValue":4, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":3}
+			},
+			"pointSpread":12,
+			"wasSet":true,
+			"wasNotSet":false,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3},
+				"Blake Adams":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":8},
+				"Ben Dixon":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":0},
+				"Greg Smith":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-5},
+				"Ezra McNichols":{"dValue":-2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1},
+				"Tracy Mueller":{"dValue":-4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1}
+			},
+			"pointSpread":9,
+			"wasSet":true,
+			"wasNotSet":false,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-5},
+				"Blake Adams":{"dValue":2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":10},
+				"Ben Dixon":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":0},
+				"Greg Smith":{"dValue":4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Ezra McNichols":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Tracy Mueller":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3}
+			},
+			"pointSpread":10,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":6, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1},
+				"Blake Adams":{"dValue":-12, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-2},
+				"Ben Dixon":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":0},
+				"Greg Smith":{"dValue":6, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":5},
+				"Ezra McNichols":{"dValue":-6, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-7},
+				"Tracy Mueller":{"dValue":6, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":3}
+			},
+			"pointSpread":9,
+			"wasSet":true,
+			"wasNotSet":false,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":1},
+				"Blake Adams":{"dValue":4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":2},
+				"Ben Dixon":{"dValue":2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":2},
+				"Greg Smith":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":3},
+				"Ezra McNichols":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-9},
+				"Tracy Mueller":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1}
+			},
+			"pointSpread":9,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":0},
+				"Blake Adams":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":2},
+				"Ben Dixon":{"dValue":2, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":4},
+				"Greg Smith":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":2},
+				"Ezra McNichols":{"dValue":1, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-8},
+				"Tracy Mueller":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":0}
+			},
+			"pointSpread":8,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-2},
+				"Blake Adams":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":0},
+				"Ben Dixon":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":4},
+				"Greg Smith":{"dValue":4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":6},
+				"Ezra McNichols":{"dValue":2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-6},
+				"Tracy Mueller":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-2}
+			},
+			"pointSpread":10,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":1, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Blake Adams":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Ben Dixon":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":3},
+				"Greg Smith":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":6},
+				"Ezra McNichols":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-7},
+				"Tracy Mueller":{"dValue":2, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":0}
+			},
+			"pointSpread":9,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3},
+				"Blake Adams":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1},
+				"Ben Dixon":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":5},
+				"Greg Smith":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":8},
+				"Ezra McNichols":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":-7},
+				"Tracy Mueller":{"dValue":-4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-4}
+			},
+			"pointSpread":14,
+			"wasSet":true,
+			"wasNotSet":false,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-7},
+				"Blake Adams":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":3},
+				"Ben Dixon":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":7},
+				"Greg Smith":{"dValue":-2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":6},
+				"Ezra McNichols":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-5},
+				"Tracy Mueller":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":-4}
+			},
+			"pointSpread":16,
+			"wasSet":true,
+			"wasNotSet":false,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":-7},
+				"Blake Adams":{"dValue":-4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Ben Dixon":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":9},
+				"Greg Smith":{"dValue":-2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":4},
+				"Ezra McNichols":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3},
+				"Tracy Mueller":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-2}
+			},
+			"pointSpread":13,
+			"wasSet":true,
+			"wasNotSet":false,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-8},
+				"Blake Adams":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Ben Dixon":{"dValue":1, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":10},
+				"Greg Smith":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":3},
+				"Ezra McNichols":{"dValue":2, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Tracy Mueller":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3}
+			},
+			"pointSpread":13,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-10},
+				"Blake Adams":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3},
+				"Ben Dixon":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":10},
+				"Greg Smith":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1},
+				"Ezra McNichols":{"dValue":4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":3},
+				"Tracy Mueller":{"dValue":2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1}
+			},
+			"pointSpread":14,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-8},
+				"Blake Adams":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Ben Dixon":{"dValue":2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":12},
+				"Greg Smith":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":1},
+				"Ezra McNichols":{"dValue":-4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Tracy Mueller":{"dValue":-2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3}
+			},
+			"pointSpread":13,
+			"wasSet":true,
+			"wasNotSet":false,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-6},
+				"Blake Adams":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3},
+				"Ben Dixon":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":10},
+				"Greg Smith":{"dValue":4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":5},
+				"Ezra McNichols":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Tracy Mueller":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-5}
+			},
+			"pointSpread":15,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":8, "wasPicker":true, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":2},
+				"Blake Adams":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-5},
+				"Ben Dixon":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":8},
+				"Greg Smith":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":3},
+				"Ezra McNichols":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3},
+				"Tracy Mueller":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":-5}
+			},
+			"pointSpread":13,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":2},
+				"Blake Adams":{"dValue":4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Ben Dixon":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":6},
+				"Greg Smith":{"dValue":2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":5},
+				"Ezra McNichols":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-5},
+				"Tracy Mueller":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-7}
+			},
+			"pointSpread":13,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1},
+				"Blake Adams":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Ben Dixon":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":5},
+				"Greg Smith":{"dValue":1, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":6},
+				"Ezra McNichols":{"dValue":2, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-3},
+				"Tracy Mueller":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-8}
+			},
+			"pointSpread":12,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Blake Adams":{"dValue":2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1},
+				"Ben Dixon":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":5},
+				"Greg Smith":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":4},
+				"Ezra McNichols":{"dValue":4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1},
+				"Tracy Mueller":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-10}
+			},
+			"pointSpread":11,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-2},
+				"Blake Adams":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":0},
+				"Ben Dixon":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":4},
+				"Greg Smith":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":4},
+				"Ezra McNichols":{"dValue":1, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":2},
+				"Tracy Mueller":{"dValue":2, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-8}
+			},
+			"pointSpread":10,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-4},
+				"Blake Adams":{"dValue":4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":4},
+				"Ben Dixon":{"dValue":2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":6},
+				"Greg Smith":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":2},
+				"Ezra McNichols":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":2},
+				"Tracy Mueller":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-10}
+			},
+			"pointSpread":14,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":6, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":2},
+				"Blake Adams":{"dValue":-6, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-2},
+				"Ben Dixon":{"dValue":-12, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-6},
+				"Greg Smith":{"dValue":6, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":8},
+				"Ezra McNichols":{"dValue":6, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":8},
+				"Tracy Mueller":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":-10}
+			},
+			"pointSpread":18,
+			"wasSet":true,
+			"wasNotSet":false,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":2},
+				"Blake Adams":{"dValue":2, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":0},
+				"Ben Dixon":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-7},
+				"Greg Smith":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":7},
+				"Ezra McNichols":{"dValue":1, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":9},
+				"Tracy Mueller":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-11}
+			},
+			"pointSpread":18,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":1},
+				"Blake Adams":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":0},
+				"Ben Dixon":{"dValue":2, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-5},
+				"Greg Smith":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":6},
+				"Ezra McNichols":{"dValue":-1, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":8},
+				"Tracy Mueller":{"dValue":1, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-10}
+			},
+			"pointSpread":15,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		},
+		{
+			"scores":{
+				"Jacob Buysse":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-1},
+				"Blake Adams":{"dValue":4, "wasPicker":true, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":4},
+				"Ben Dixon":{"dValue":0, "wasPicker":false, "wasPartner":false, "wasOut":true, "wonLeaster":false, "misplayed":false, "value":-5},
+				"Greg Smith":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":4},
+				"Ezra McNichols":{"dValue":-2, "wasPicker":false, "wasPartner":false, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":6},
+				"Tracy Mueller":{"dValue":2, "wasPicker":false, "wasPartner":true, "wasOut":false, "wonLeaster":false, "misplayed":false, "value":-8}
+			},
+			"pointSpread":14,
+			"wasSet":false,
+			"wasNotSet":true,
+			"wasDoubler":false
+		}
+	]
+}
