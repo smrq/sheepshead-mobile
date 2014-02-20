@@ -1,4 +1,6 @@
 @import "bootstrap.variables.less";
+@import "../../bower_components/bootstrap/less/mixins.less";
+@import "../../bower_components/bootstrap/less/buttons.less";
 
 body {
 	-webkit-touch-callout: none;    // prevent callout to copy image, etc when tap to hold
@@ -80,10 +82,10 @@ body {
 }
 
 .score-hand {
-	padding-top: 10px;
+	padding-top: 20px;
 	padding-bottom: @navbar-height;
-	.top-buttons {
-		margin-bottom: 10px;
+	.top-buttons, .players {
+		margin-bottom: 20px;
 	}
 	.player {
 		overflow: auto;
@@ -92,7 +94,34 @@ body {
 			line-height: 34px;
 			display: inline-block;
 		}
-		.buttons { float: right; }
+		.player-buttons {
+			float: right;
+			margin-left: 10px;
+		}
+	}
+
+	.btn.toggled {
+		&.doubler,
+		&.leaster,
+		&.player-leaster,
+		&.player-leaster-out, 
+		&.misplay,
+		&.player-misplay,
+		&.player-misplay-out { .btn-primary; }
+
+		&.player-out,
+		&.player-picker,
+		&.player-partner,
+		&.score-button {
+			.btn-success;
+			&.set { .btn-danger; }
+		}
+	}
+
+	.btn.set-button {
+		width: 50px;
+		.btn-success;
+		&.toggled { .btn-danger; }
 	}
 }
 

@@ -1,30 +1,30 @@
 .score-list: table.table.table-condensed
 	thead: tr
 		th.col-doubler
-		th.col-score(ng-repeat="player in players")
-			| {{player.playerAbbreviation}}
+		th.col-score(ng-repeat="player in players()")
+			| {{player.abbreviation}}
 		th.point-spread PS
 
 	tbody: tr(
-		ng-repeat="hand in hands"
+		ng-repeat="hand in hands()"
 		ng-class="{set: hand.wasSet, 'not-set': hand.wasNotSet}")
 		td.col-doubler(ng-class="{doubler: hand.wasDoubler, leaster: hand.wasLeaster}")
 		td.col-score(
-			ng-repeat="score in hand.scores"
+			ng-repeat="player in players()"
 			ng-class="{                    \
-				partner: score.wasPartner, \
-				picker: score.wasPicker,   \
-				out: score.wasOut,         \
-				leaster: score.wasLeaster, \
-				misplay: score.wasMisplay  \
+				partner: hand.scores[player.name].wasPartner, \
+				picker: hand.scores[player.name].wasPicker,   \
+				out: hand.scores[player.name].wasOut,         \
+				leaster: hand.scores[player.name].wonLeaster, \
+				misplay: hand.scores[player.name].misplayed   \
 			}")
-			| {{score.wasOut ? '–' : score.value}}
+			| {{hand.scores[player.name].wasOut ? '–' : hand.scores[player.name].value}}
 		td.point-spread {{ hand.pointSpread }}
 
 	tfoot: tr
 		th.col-doubler
-		th.col-score(ng-repeat="player in players")
-			| {{player.playerAbbreviation}}
+		th.col-score(ng-repeat="player in players()")
+			| {{player.abbreviation}}
 		th.point-spread PS
 
 nav.navbar.navbar-default.navbar-fixed-bottom: .container

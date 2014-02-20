@@ -1,19 +1,28 @@
 .score-hand
 	.top-buttons
-		button.btn(ng-model="wasDoubler" btn-checkbox ng-class="{'btn-primary': wasDoubler}") Doubler
-		button.btn(ng-model="wasLeaster" btn-checkbox ng-class="{'btn-primary': wasLeaster}") Leaster
-		button.btn(ng-model="wasMisplay" btn-checkbox ng-class="{'btn-danger': wasMisplay}") Misplay
-	.player(ng-repeat="player in players")
-		.name {{player.player}}
-		.buttons(ng-show="wasNormalGame()")
+		button.btn.doubler(ng-click="toggleWasDoubler()" ng-class="{'toggled': handInfo.wasDoubler}") Doubler
+		button.btn.leaster(ng-click="toggleWasLeaster()" ng-class="{'toggled': handInfo.wasLeaster}") Leaster
+		button.btn.misplay(ng-click="toggleWasMisplay()" ng-class="{'toggled': handInfo.wasMisplay}") Misplay
+	.players: .player(ng-repeat="player in players()")
+		.name {{player.name}}
+		.player-buttons(ng-show="wasNormalGame()")
 			.btn-group
-				button.btn(ng-model="player.wasPicker" btn-checkbox ng-class="{'btn-primary': player.wasPicker}") P
-				button.btn(ng-model="player.wasPartner" btn-checkbox ng-class="{'btn-primary': player.wasPartner}") ∗
-			button.btn(ng-model="player.wasOut" btn-checkbox ng-class="{'btn-primary': player.wasOut}") Out
-		.buttons(ng-show="wasLeaster")
-			button.btn(ng-model="player.wasLeaster" btn-checkbox ng-class="{'btn-primary': player.wasLeaster}") won this hand
-		.buttons(ng-show="wasMisplay")
-			button.btn(ng-model="player.wasMisplay" btn-checkbox ng-class="{'btn-danger': player.wasMisplay}") done fucked up
-
+				button.btn.player-picker(ng-click="togglePicker(player.name)" ng-class="{'toggled': player.name === handInfo.picker, 'set': handInfo.wasSet}") P
+				button.btn.player-partner(ng-click="togglePartner(player.name)" ng-class="{'toggled': player.name === handInfo.partner, 'set': handInfo.wasSet}") ∗
+			button.btn.player-out(ng-click="toggleOut(player.name)" ng-class="{'toggled': player.name === handInfo.whoWasOut, 'set': handInfo.wasSet}") Out
+		.player-buttons(ng-show="handInfo.wasLeaster")
+			button.btn.player-leaster(ng-click="toggleLeasterWinner(player.name)" ng-class="{'toggled': player.name === handInfo.whoWonLeaster}") Won
+			button.btn.player-leaster-out(ng-click="toggleOut(player.name)" ng-class="{'toggled': player.name === handInfo.whoWasOut}") Out
+		.player-buttons(ng-show="handInfo.wasMisplay")
+			button.btn.player-misplay(ng-click="toggleMisplayer(player.name)" ng-class="{'toggled': player.name === handInfo.whoMisplayed}") Misplayed
+			button.btn.player-misplay-out(ng-click="toggleOut(player.name)" ng-class="{'toggled': player.name === handInfo.whoWasOut}") Out
+	.score-buttons(ng-show="wasNormalGame()")
+		button.btn.set-button(ng-click="toggleSet()" ng-class="{'toggled': handInfo.wasSet}")
+			{{handInfo.wasSet ? 'Set' : 'Win'}}
+		.btn-group
+			button.btn.score-button(ng-click="setSchneider()" ng-class="{'toggled': wasSchneider(), 'set': handInfo.wasSet}") Schneider
+			button.btn.score-button(ng-click="setNoSchneider()" ng-class="{'toggled': handInfo.wasNoSchneider, 'set': handInfo.wasSet}") No Schneider
+			button.btn.score-button(ng-click="setNoTrick()" ng-class="{'toggled': handInfo.wasNoTrick, 'set': handInfo.wasSet}") No Trick
+			
 nav.navbar.navbar-default.navbar-fixed-bottom: .container
 	button.btn.btn-primary.navbar-btn(ng-click="submitScore()" ng-disabled="!canSubmit()") Score this hand
