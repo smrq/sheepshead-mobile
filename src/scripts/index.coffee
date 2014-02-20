@@ -11,6 +11,9 @@ m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
 	($routeProvider, $locationProvider) ->
 		$routeProvider
 			.when '/',
+				templateUrl: 'selectPlayers.html'
+				controller: 'SelectPlayersCtrl'
+			.when '/scoreList',
 				templateUrl: 'scoreList.html'
 				controller: 'ScoreListCtrl'
 			.when '/scoreHand',
@@ -19,6 +22,7 @@ m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
 			.otherwise
 				redirectTo: '/'
 
+require('./selectPlayersCtrl')(m)
 require('./scoreListCtrl')(m)
 require('./scoreHandCtrl')(m)
 

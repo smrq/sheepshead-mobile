@@ -1,0 +1,6 @@
+.select-players
+	form: .form-group(ng-repeat="player in players")
+		input.form-control.name-lookup(type="text" ng-model="player.name" placeholder="Name" typeahead="name for name in getNames($viewValue)")
+
+nav.navbar.navbar-default.navbar-fixed-bottom: .container
+	button.btn.btn-primary.navbar-btn(ng-click="startGame()" ng-disabled="!canSubmit()") Start the game

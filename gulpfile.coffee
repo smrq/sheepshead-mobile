@@ -8,6 +8,7 @@ fixSourceMaps = require 'gulp-fix-windows-source-maps'
 gulp = require 'gulp'
 gutil = require 'gulp-util'
 htmlreplace = require 'gulp-html-replace'
+httpProxy = require 'http-proxy'
 jade = require 'gulp-jade'
 less = require 'gulp-less'
 livereload = require 'gulp-livereload'
@@ -25,10 +26,13 @@ MARKUP_GLOB =  'src/markup/*.jade'
 MAIN_SCRIPT =  'src/scripts/index.coffee'
 
 startExpress = ->
+	proxy = httpProxy.createProxyServer {}
 	app = express()
 	app.use connectLivereload()
 	app.get '/phonegap.js', (req, res) -> res.sendfile './bower_components/phonegap-desktop/js/phonegap-desktop.js'
 	app.get '/debugdata.json', (req, res) -> res.sendfile './bower_components/phonegap-desktop/debugdata.json'
+	app.get '/sheepshead.cgi', (req, res) ->
+		proxy.web req, res, { target: 'http://sheepshead.overmangroup.com:80' }
 	app.use express.static path.join __dirname, BUILD_FOLDER
 	app.listen EXPRESS_PORT
 
@@ -55,7 +59,7 @@ scripts = ->
 				path: 'bower_components/angular-animate/angular-animate.js'
 				exports: 'angular'
 			'angular-bootstrap':
-				path: 'bower_components/angular-bootstrap/ui-bootstrap.js'
+				path: 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js'
 				exports: 'angular'
 			'angular-route':
 				path: 'bower_components/angular-route/angular-route.js'

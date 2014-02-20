@@ -30,6 +30,7 @@
     "underscore": "~1.5.2",
     "coffee-script": "~1.7.1",
     "deglobalify": "~0.2.0",
-    "fastclick": "~0.6.11"
+    "fastclick": "~0.6.11",
+    "http-proxy": "~1.0.2"
   }
 }
