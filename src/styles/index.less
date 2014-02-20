@@ -9,6 +9,11 @@ body {
 	overflow: hidden;
 }
 
+button {
+	min-height: 44px;
+	min-width: 44px;
+}
+
 .title {
 	text-align: center;
 	line-height: @navbar-height;
@@ -82,16 +87,22 @@ body {
 }
 
 .score-hand {
-	padding-top: 20px;
+	padding-top: 10px;
 	padding-bottom: @navbar-height;
-	.top-buttons, .players {
-		margin-bottom: 20px;
+
+	.top-buttons, .score-buttons {
+		width: 100%;
+		button { width: 32%; }
+	}
+
+	.top-buttons, .players, .set-button {
+		margin-bottom: 10px;
 	}
 	.player {
 		overflow: auto;
 		margin-bottom: 10px;
 		.name {
-			line-height: 34px;
+			line-height: 44px;
 			display: inline-block;
 		}
 		.player-buttons {
@@ -119,7 +130,7 @@ body {
 	}
 
 	.btn.set-button {
-		width: 50px;
+		width: 100%;
 		.btn-success;
 		&.toggled { .btn-danger; }
 	}
