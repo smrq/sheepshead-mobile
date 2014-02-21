@@ -1,6 +1,6 @@
 @import "bootstrap.variables.less";
-@import "../../bower_components/bootstrap/less/mixins.less";
-@import "../../bower_components/bootstrap/less/buttons.less";
+@import "bootstrap.mixins.less";
+@import "../../bower_components/bootstrap/less/type.less";
 
 body {
 	-webkit-touch-callout: none;    // prevent callout to copy image, etc when tap to hold
@@ -9,137 +9,53 @@ body {
 	overflow: hidden;
 }
 
-button {
+button.btn
+{
 	min-height: 44px;
 	min-width: 44px;
+	padding-left: 9px;
+	padding-right: 9px;
+	& > div {
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 }
 
-.title {
-	text-align: center;
-	line-height: @navbar-height;
-	height: @navbar-height;
-	box-sizing: border-box;
+.navbar {
 	--webkit-user-select: none;
 	--webkit-user-drag: none;
 	--webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+.navbar-title {
+	.bg-primary;
+	text-align: center;
+	line-height: @navbar-height;
 	font-weight: bold;
 	font-size: @font-size-large;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
-.select-players {
-	padding-top: 10px;
+.navbar-micro {
+	min-height: @micro-navbar-height;
+	height: @micro-navbar-height;
+}
+
+.navbar.navbar-fixed-top ~ .content {
+	padding-top: @navbar-height;
+}
+
+.navbar.navbar-fixed-top.navbar-micro ~ .content {
+	padding-top: @micro-navbar-height;
+}
+
+.navbar.navbar-fixed-bottom ~ .content {
 	padding-bottom: @navbar-height;
 }
 
-.score-list {
-	padding-top: 10px;
-	padding-bottom: @navbar-height;
-	.table {
-		td, th { text-align: center; vertical-align: baseline; }
-
-		.col-doubler { padding: 0; }
-		.col-score { width: 13.5%; }
-
-		.set { color: @brand-danger; }
-		.not-set { color: @brand-success; }
-
-		.picker {
-			font-weight: bold;
-			&:after { content: "P"; vertical-align: super; font-size: 75%; position: absolute; }
-		}
-		.partner {
-			&:after { content: "×"; vertical-align: super; font-size: 75%; position: absolute; }
-		}
-
-		.picker.partner {
-			font-weight: bold;
-			&:after { content: "P×"; vertical-align: super; font-size: 75%; position: absolute; }
-		}
-
-		.doubler {
-			padding: @table-condensed-cell-padding;
-			width: 7.5%;
-			&:before {
-				content: "D";
-				color: black;
-				font-weight: bold;
-			}
-		}
-
-		.leaster {
-			font-weight: bold;
-			&:after { content: "L"; vertical-align: super; font-size: 75%; position: absolute; }
-		}
-
-		.misplay {
-			font-weight: bold;
-			&:after { content: "MP"; vertical-align: super; font-size: 75%; position: absolute; }
-		}
-
-		.out {
-			color: black;
-		}
-
-		.point-spread {
-			font-size: 75%;
-		}
-	}
-}
-
-.score-hand {
-	padding-top: 10px;
-	padding-bottom: @navbar-height;
-
-	.top-buttons, .score-buttons {
-		width: 100%;
-		button { width: 32%; }
-	}
-
-	.top-buttons, .players, .set-button {
-		margin-bottom: 10px;
-	}
-	.player {
-		overflow: auto;
-		margin-bottom: 10px;
-		.name {
-			line-height: 44px;
-			display: inline-block;
-		}
-		.player-buttons {
-			float: right;
-			margin-left: 10px;
-		}
-	}
-
-	.btn.toggled {
-		&.doubler,
-		&.leaster,
-		&.player-leaster,
-		&.player-leaster-out, 
-		&.misplay,
-		&.player-misplay,
-		&.player-misplay-out { .btn-primary; }
-
-		&.player-out,
-		&.player-picker,
-		&.player-partner,
-		&.score-button {
-			.btn-success;
-			&.set { .btn-danger; }
-		}
-	}
-
-	.btn.set-button {
-		width: 100%;
-		.btn-success;
-		&.toggled { .btn-danger; }
-	}
-}
-
-.content {
-	width: 100%;
-	position: absolute;
-	top: @navbar-height;
-	bottom: 0;
-	overflow-y: auto;
+form {
+	margin-top: 10px;
+	margin-bottom: 10px;
 }

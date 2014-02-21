@@ -31,6 +31,7 @@
     "coffee-script": "~1.7.1",
     "deglobalify": "~0.2.0",
     "fastclick": "~0.6.11",
-    "http-proxy": "~1.0.2"
+    "http-proxy": "~1.0.2",
+    "brfs": "~0.2.1"
   }
 }

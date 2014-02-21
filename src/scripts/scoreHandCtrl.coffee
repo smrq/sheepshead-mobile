@@ -3,7 +3,7 @@ _ = require 'underscore'
 module.exports = (m) ->
 	m.controller 'ScoreHandCtrl', ($scope, screenService, scoreKeeperService) ->
 		$scope.handInfo =
-			whoWasOut: null
+			whoWasOut: screenService.data().out
 			wasMisplay: false
 			whoMisplayed: null
 			wasLeaster: false

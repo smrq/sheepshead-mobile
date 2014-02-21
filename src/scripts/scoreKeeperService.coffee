@@ -1,7 +1,7 @@
-module.exports = (m) ->
+module.exports = (m, initData) ->
 	m.factory 'scoreKeeperService', ->
-		players = []
-		hands = []
+		players = initData.players ? []
+		hands = initData.hands ? []
 
 		abbreviate = (name) ->
 			name.split ' '

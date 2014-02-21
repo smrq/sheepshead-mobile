@@ -7,8 +7,12 @@ require 'angular-route'
 
 attachFastclick document.body
 
+initData = {}
+if window.location.hash isnt '#/'
+	initData = JSON.parse require('fs').readFileSync('2014-02-20.json')
+
 m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
-	($routeProvider, $locationProvider) ->
+	($routeProvider) ->
 		$routeProvider
 			.when '/',
 				templateUrl: 'selectPlayers.html'
@@ -26,7 +30,7 @@ require('./selectPlayersCtrl')(m)
 require('./scoreListCtrl')(m)
 require('./scoreHandCtrl')(m)
 
-require('./scoreKeeperService')(m)
+require('./scoreKeeperService')(m, initData)
 require('./screenService')(m)
 require('./webService')(m)
 

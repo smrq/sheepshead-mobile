@@ -50,7 +50,7 @@ styles = ->
 scripts = ->
 	browserifyOpts =
 		debug: true
-		transform: ['coffeeify']
+		transform: ['coffeeify', 'brfs']
 		extensions: ['.coffee']
 		shim:
 			'angular':
