@@ -6,6 +6,7 @@ module.exports = (m) ->
 
 		replace: (screen, params) ->
 			$location.path "/#{screen}"
+				.replace()
 				.search params
 				.replace()
 
