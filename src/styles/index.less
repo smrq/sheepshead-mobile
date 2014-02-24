@@ -55,7 +55,20 @@ button.btn
 	padding-bottom: @navbar-height;
 }
 
+.row {
+	margin-top: @group-padding;
+	margin-bottom: @group-padding;
+}
+
 form {
 	margin-top: 10px;
 	margin-bottom: 10px;
+}
+
+table.table {
+	margin-bottom: 10px;
+}
+
+[class*='col-xs-'], [class*='col-md-'] {
+	& > .btn { width: 100%; }
 }

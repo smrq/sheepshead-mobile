@@ -1,0 +1,11 @@
+nav.navbar.navbar-fixed-top.navbar-title
+	| Sheepshead Scores
+
+nav.navbar.navbar-default.navbar-fixed-bottom: .container
+	button.btn.btn-primary.navbar-btn(ng-click="startNewGame()") Start a new game
+
+.content.scores-submitted
+	.row(ng-repeat="player in finalScores", ng-class="{positive: player.score > 0, negative: player.score < 0}")
+		.col-xs-6 {{player.name}}
+		.col-xs-6.score
+			| {{player.score}}

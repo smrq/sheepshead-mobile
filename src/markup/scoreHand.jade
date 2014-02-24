@@ -5,12 +5,12 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 
 .content.score-hand
 	.row
-		.col-xs-4.col-md-4: button.btn(ng-click="toggleWasDoubler()" ng-class="{'toggled': handInfo.wasDoubler}") Doubler
-		.col-xs-4.col-md-4: button.btn(ng-click="toggleWasLeaster()" ng-class="{'toggled': handInfo.wasLeaster}") Leaster
-		.col-xs-4.col-md-4: button.btn(ng-click="toggleWasMisplay()" ng-class="{'toggled': handInfo.wasMisplay}") Misplay
+		.col-xs-4: button.btn(ng-click="toggleWasDoubler()" ng-class="{'toggled': handInfo.wasDoubler}") Doubler
+		.col-xs-4: button.btn(ng-click="toggleWasLeaster()" ng-class="{'toggled': handInfo.wasLeaster}") Leaster
+		.col-xs-4: button.btn(ng-click="toggleWasMisplay()" ng-class="{'toggled': handInfo.wasMisplay}") Misplay
 	.row.player(ng-repeat="player in players()")
-		.col-xs-6.col-md-6: .name {{player.name}}
-		.col-xs-6.col-md-6
+		.col-xs-6: .name {{player.name}}
+		.col-xs-6
 			.player-buttons(ng-show="wasNormalGame()")
 				.btn-group
 					button.btn.score-button(ng-click="togglePicker(player.name)" ng-class="{'toggled': player.name === handInfo.picker, 'set': handInfo.wasSet}") P
@@ -23,12 +23,12 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 				button.btn(ng-click="toggleMisplayer(player.name)" ng-class="{'toggled': player.name === handInfo.whoMisplayed}") MP
 				button.btn(ng-click="toggleOut(player.name)" ng-class="{'toggled': player.name === handInfo.whoWasOut}") Out
 	.row(ng-show="wasNormalGame()")
-		.col-xs-12.col-md-12: button.btn.set-button(ng-click="toggleSet()" ng-class="{'toggled': handInfo.wasSet}")
+		.col-xs-12: button.btn.set-button(ng-click="toggleSet()" ng-class="{'toggled': handInfo.wasSet}")
 			| {{handInfo.wasSet ? 'Set' : 'Win'}}
 	.row(ng-show="wasNormalGame()")
-		.col-xs-4.col-md-4: button.btn.score-button(ng-click="setSchneider()" ng-class="{'toggled': wasSchneider(), 'set': handInfo.wasSet}")
+		.col-xs-4: button.btn.score-button(ng-click="setSchneider()" ng-class="{'toggled': wasSchneider(), 'set': handInfo.wasSet}")
 			div Schneider
-		.col-xs-4.col-md-4: button.btn.score-button(ng-click="setNoSchneider()" ng-class="{'toggled': handInfo.wasNoSchneider, 'set': handInfo.wasSet}")
+		.col-xs-4: button.btn.score-button(ng-click="setNoSchneider()" ng-class="{'toggled': handInfo.wasNoSchneider, 'set': handInfo.wasSet}")
 			div No Schneider
-		.col-xs-4.col-md-4: button.btn.score-button(ng-click="setNoTrick()" ng-class="{'toggled': handInfo.wasNoTrick, 'set': handInfo.wasSet}")
+		.col-xs-4: button.btn.score-button(ng-click="setNoTrick()" ng-class="{'toggled': handInfo.wasNoTrick, 'set': handInfo.wasSet}")
 			div No Trick

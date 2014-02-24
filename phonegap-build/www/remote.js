@@ -5,4 +5,5 @@
 	global.remote = function (url) {
 		return remotes[url];
 	};
+	global.inBrowser = false;
 })(window);

@@ -3,7 +3,7 @@ nav.navbar.navbar-fixed-top.navbar-title
 
 nav.navbar.navbar-default.navbar-fixed-bottom: .container
 	button.btn.btn-primary.navbar-btn(ng-click="addScore()") Score a hand
-	button.btn.navbar-btn.pull-right(ng-click="undoScore()", ng-show="showUndo()") Undo
+	button.btn.navbar-btn.pull-right(ng-click="undoScore()", ng-show="hasAnyHands()") Undo
 
 .content.score-list
 	table.table.table-condensed
@@ -34,3 +34,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 			th.col-score(ng-repeat="player in players()")
 				| {{player.abbreviation}}
 			th.point-spread PS
+
+	.row
+		.col-xs-12: button.btn.btn-primary(ng-click="submitFinalScores()" ng-show="hasAnyHands()")
+			| Submit scores

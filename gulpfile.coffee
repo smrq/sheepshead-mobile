@@ -32,7 +32,7 @@ startExpress = ->
 	app.get '/phonegap.js', (req, res) -> res.sendfile './bower_components/phonegap-desktop/js/phonegap-desktop.js'
 	app.get '/debugdata.json', (req, res) -> res.sendfile './bower_components/phonegap-desktop/debugdata.json'
 	app.get '/remote.js', (req, res) -> res.sendfile './proxyRemote.js'
-	app.get '/sheepshead.cgi', (req, res) ->
+	app.all '/sheepshead.cgi', (req, res) ->
 		proxy.web req, res, { target: 'http://sheepshead.overmangroup.com:80' }
 	app.use express.static path.join __dirname, BUILD_FOLDER
 	app.listen EXPRESS_PORT
