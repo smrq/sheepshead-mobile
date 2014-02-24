@@ -127,5 +127,6 @@ module.exports = (m, initData) ->
 				wasNotSet: not (handInfo.wasSet or handInfo.wasLeaster or handInfo.wasMisplay)
 				wasDoubler: handInfo.wasDoubler
 
+		removeLastHand: -> hands.pop()
 		players: -> players
 		hands: -> hands

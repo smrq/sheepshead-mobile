@@ -1,20 +1,25 @@
 _ = require 'underscore'
 
+createHandInfo = (data) ->
+	handInfo = _.extend {}, data
+	handInfo.whoWasOut ?= null
+	handInfo.wasMisplay ?= false
+	handInfo.whoMisplayed ?= null
+	handInfo.wasLeaster ?= false
+	handInfo.whoWonLeaster ?= null
+	handInfo.wasDoubler ?= false
+	handInfo.picker ?= null
+	handInfo.partner ?= null
+	handInfo.wasSet ?= false
+	handInfo.wasNoTrick ?= false
+	handInfo.wasNoSchneider ?= false
+	return handInfo
+
 module.exports = (m) ->
 	m.controller 'ScoreHandCtrl', ($scope, screenService, scoreKeeperService) ->
-		$scope.handInfo =
-			whoWasOut: screenService.data().out
-			wasMisplay: false
-			whoMisplayed: null
-			wasLeaster: false
-			whoWonLeaster: null
-			wasDoubler: false
-			picker: null
-			partner: null
-			wasSet: false
-			wasNoTrick: false
-			wasNoSchneider: false
 
+		$scope.handInfo = createHandInfo screenService.data()
+		
 		$scope.players = -> scoreKeeperService.players()
 
 		$scope.toggleWasDoubler = ->

@@ -5,6 +5,9 @@ require 'angular-animate'
 require 'angular-bootstrap'
 require 'angular-route'
 
+require 'underscore'
+require './underscoreExt'
+
 attachFastclick document.body
 
 initData = {}
