@@ -1,7 +1,7 @@
-module.exports = (m, initData) ->
-	m.factory 'scoreKeeperService', ->
-		players = initData.players ? []
-		hands = initData.hands ? []
+module.exports = (m) ->
+	m.factory 'scoreKeeperService', (localStorageService) ->
+		players = []
+		hands = []
 
 		abbreviate = (name) ->
 			name.split ' '
@@ -130,3 +130,8 @@ module.exports = (m, initData) ->
 		removeLastHand: -> hands.pop()
 		players: -> players
 		hands: -> hands
+
+		saveState: ->
+			localStorageService.setObject 'scoreKeeperService', { players, hands }
+		loadState: ->
+			{ players, hands } = localStorageService.getObject 'scoreKeeperService'

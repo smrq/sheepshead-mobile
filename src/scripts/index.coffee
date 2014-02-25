@@ -11,10 +11,6 @@ require './underscoreExt'
 unless inBrowser
 	attachFastclick document.body
 
-initData = {}
-if window.location.hash isnt '#/'
-	initData = JSON.parse require('fs').readFileSync('2014-02-20.json')
-
 m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
 	($routeProvider, $httpProvider) ->
 		require('./setupRoutes')($routeProvider)
@@ -25,9 +21,16 @@ require('./scoreListCtrl')(m)
 require('./scoreHandCtrl')(m)
 require('./scoresSubmittedCtrl')(m)
 
-require('./scoreKeeperService')(m, initData)
+require('./localStorageService')(m)
+require('./scoreKeeperService')(m)
 require('./screenService')(m)
 require('./webService')(m)
+
+if window.location.hash isnt '#/'
+	m.run (localStorageService, scoreKeeperService) ->
+		scoreKeeperServiceData = JSON.parse require('fs').readFileSync('2014-02-20.json')
+		localStorageService.setObject 'scoreKeeperService', scoreKeeperServiceData
+		scoreKeeperService.loadState()
 
 document.addEventListener "deviceready", ->
 	angular.bootstrap document, ['app']
