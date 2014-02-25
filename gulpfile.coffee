@@ -19,7 +19,7 @@ watch = require 'gulp-watch'
 
 BUILD_FOLDER = './phonegap-build/www/'
 EXPRESS_PORT = 4000
-CONTENT_GLOB = 'src/res/*'
+CONTENT_GLOB = 'src/res/**/*'
 STYLES_GLOB =  'src/styles/*.less'
 SCRIPTS_GLOB = 'src/scripts/*.coffee'
 MARKUP_GLOB =  'src/markup/*.jade'
