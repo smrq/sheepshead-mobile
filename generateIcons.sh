@@ -1,3 +1,6 @@
+# TODO: integrate with Cordova build
+# https://gist.github.com/LinusU/7515016
+
 inkscape -z -w  36 -h  36 -e "./phonegap-build/platforms/android/res/drawable-ldpi/icon.png"  "./sheepshead.svg"
 inkscape -z -w  72 -h  72 -e "./phonegap-build/platforms/android/res/drawable-mdpi/icon.png"  "./sheepshead.svg"
 inkscape -z -w  48 -h  48 -e "./phonegap-build/platforms/android/res/drawable-hdpi/icon.png"  "./sheepshead.svg"
