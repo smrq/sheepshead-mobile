@@ -26,11 +26,14 @@ require('./scoreKeeperService')(m)
 require('./screenService')(m)
 require('./webService')(m)
 
-if window.location.hash isnt '#/'
-	m.run (localStorageService, scoreKeeperService) ->
-		scoreKeeperServiceData = JSON.parse require('fs').readFileSync('2014-02-20.json')
-		localStorageService.setObject 'scoreKeeperService', scoreKeeperServiceData
-		scoreKeeperService.loadState()
+m.run (scoreKeeperService) ->
+	scoreKeeperService.loadState()
+
+window.testData =
+	setup: ->
+		localStorage.setItem 'scoreKeeperService', require('fs').readFileSync('2014-02-20.json')
+	teardown: ->
+		localStorage.removeItem 'scoreKeeperService'
 
 document.addEventListener "deviceready", ->
 	angular.bootstrap document, ['app']

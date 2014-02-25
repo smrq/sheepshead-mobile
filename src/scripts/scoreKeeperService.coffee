@@ -133,5 +133,7 @@ module.exports = (m) ->
 
 		saveState: ->
 			localStorageService.setObject 'scoreKeeperService', { players, hands }
+
 		loadState: ->
-			{ players, hands } = localStorageService.getObject 'scoreKeeperService'
+			data = localStorageService.getObject 'scoreKeeperService'
+			{ players, hands } = data if data?
