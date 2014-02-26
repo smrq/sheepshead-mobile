@@ -1,5 +1,5 @@
 module.exports = (m) ->
-	m.factory 'scoreKeeperService', (localStorageService) ->
+	m.factory 'scoreKeeperService', ($window) ->
 		players = []
 		hands = []
 
@@ -111,29 +111,44 @@ module.exports = (m) ->
 			return positive if positive is negative
 			throw 'ERROR: Point spread did not match up.'
 
-		startGame: (names) ->
-			players = for name in names
-				{ name: name, abbreviation: abbreviate name }
-			hands = []
+		service =
+			startGame: (names) ->
+				players = for name in names
+					{ name: name, abbreviation: abbreviate name }
+				hands = []
+				@saveState()
 
-		scoreHand: (handInfo) ->
-			scores = {}
-			for player in players
-				scores[player.name] = scoreForPlayer player.name, handInfo
-			hands.push
-				scores: scores
-				pointSpread: calculatePointSpread scores
-				wasSet: handInfo.wasSet
-				wasNotSet: not (handInfo.wasSet or handInfo.wasLeaster or handInfo.wasMisplay)
-				wasDoubler: handInfo.wasDoubler
+			scoreHand: (handInfo) ->
+				scores = {}
+				for player in players
+					scores[player.name] = scoreForPlayer player.name, handInfo
+				hands.push
+					scores: scores
+					pointSpread: calculatePointSpread scores
+					wasSet: handInfo.wasSet
+					wasNotSet: not (handInfo.wasSet or handInfo.wasLeaster or handInfo.wasMisplay)
+					wasDoubler: handInfo.wasDoubler
+				@saveState()
 
-		removeLastHand: -> hands.pop()
-		players: -> players
-		hands: -> hands
+			removeLastHand: ->
+				hands.pop()
+				@saveState()
 
-		saveState: ->
-			localStorageService.setObject 'scoreKeeperService', { players, hands }
+			players: -> players
+			hands: -> hands
 
-		loadState: ->
-			data = localStorageService.getObject 'scoreKeeperService'
-			{ players, hands } = data if data?
+			saveState: ->
+				$window.localStorage.setItem 'scoreKeeperService', JSON.stringify { players, hands }
+
+			loadState: ->
+				data = $window.localStorage.getItem 'scoreKeeperService'
+				{ players, hands } = JSON.parse data if data?
+
+			clearState: ->
+				$window.localStorage.removeItem 'scoreKeeperService'
+
+			hasSavedState: ->
+				$window.localStorage.getItem('scoreKeeperService')?
+
+		service.loadState()
+		return service

@@ -30,6 +30,7 @@ module.exports = (m) ->
 
 			webService.postScores players, hands
 
+			scoreKeeperService.clearState()
 			screenService.replace 'scoresSubmitted'
 
 		$scope.nextOut = ->
