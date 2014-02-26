@@ -16,15 +16,15 @@ m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
 		require('./setupRoutes')($routeProvider)
 		require('./setupHttpProvider')($httpProvider)
 
-require('./mainCtrl')(m)
-require('./selectPlayersCtrl')(m)
-require('./scoreListCtrl')(m)
-require('./scoreHandCtrl')(m)
-require('./scoresSubmittedCtrl')(m)
+require('./controllers/mainCtrl')(m)
+require('./controllers/selectPlayersCtrl')(m)
+require('./controllers/scoreListCtrl')(m)
+require('./controllers/scoreHandCtrl')(m)
+require('./controllers/scoresSubmittedCtrl')(m)
 
-require('./scoreKeeperService')(m)
-require('./screenService')(m)
-require('./webService')(m)
+require('./services/scoreKeeperService')(m)
+require('./services/screenService')(m)
+require('./services/webService')(m)
 
 window.testData =
 	setup: ->
@@ -32,7 +32,7 @@ window.testData =
 	teardown: ->
 		localStorage.removeItem 'scoreKeeperService'
 	selectPlayers: ->
-		scope = angular.element(document).scope().$$childHead
+		scope = angular.element(document).scope().$$childHead.$$childHead
 		scope.$apply ->
 			scope.players = ['Jacob Buysse','Blake Adams','Ben Dixon','Greg Smith','Ezra McNichols','Anne Sechtig'].map (name) -> {name}
 
