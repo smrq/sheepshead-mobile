@@ -27,7 +27,7 @@ require('./services/webService')(m)
 
 window.testData =
 	setup: ->
-		localStorage.setItem 'scoreKeeperService', require('fs').readFileSync('2014-02-20.json')
+		localStorage.setItem 'scoreKeeperService', require('fs').readFileSync('test.json')
 	teardown: ->
 		localStorage.removeItem 'scoreKeeperService'
 	selectPlayers: ->

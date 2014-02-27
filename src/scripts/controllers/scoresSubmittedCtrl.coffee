@@ -1,11 +1,11 @@
 module.exports = (m) ->
 	m.controller 'ScoresSubmittedCtrl', ($scope, screenService, scoreKeeperService) ->
-		players = scoreKeeperService.players()
-		lastHand = scoreKeeperService.hands().slice(-1)[0]
+		players = scoreKeeperService.players
+		finalScores = scoreKeeperService.finalScores()
 
-		$scope.finalScores = players.map (p) ->
+		$scope.finalScores = _.zipWith players, finalScores.cumulativeScores, (p, s) ->
 			name: p.name
-			score: lastHand.scores[p.name].value
+			score: s
 
 		$scope.startNewGame = ->
 			screenService.replace ''

@@ -1,7 +1,7 @@
 _ = require 'underscore'
 
 module.exports = (m) ->
-	m.factory 'scoreKeeperService', ($window) ->
+	m.factory 'scoreKeeperService', ($window, webService) ->
 		abbreviate = (name) ->
 			name.split ' '
 				.map (w) -> w[0]
@@ -110,4 +110,8 @@ module.exports = (m) ->
 
 			hasSavedState: ->
 				$window.localStorage.getItem('scoreKeeperService')?
+
+			submitScores: ->
+				webService.postScores @players, @hands
+				@clearState()
 		}

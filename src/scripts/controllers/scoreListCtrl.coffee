@@ -1,13 +1,12 @@
 _ = require 'underscore'
 
 module.exports = (m) ->
-	m.controller 'ScoreListCtrl', ($scope, screenService, scoreKeeperService, webService) ->
+	m.controller 'ScoreListCtrl', ($scope, screenService, scoreKeeperService) ->
 
 		$scope.scoreKeeperService = scoreKeeperService
 
 		$scope.players = scoreKeeperService.players
-		$scope.hands = scoreKeeperService.scoreTable()
-		$scope.$watch 'scoreKeeperService.hands', ->
+		$scope.$watchCollection 'scoreKeeperService.hands', ->
 			$scope.hands = scoreKeeperService.scoreTable()
 
 		$scope.isWin = (hand) ->
@@ -51,9 +50,8 @@ module.exports = (m) ->
 
 		submitFinalScoresCallback = (button) ->
 			return unless button is 1
-			webService.postScores scoreKeeperService.players, scoreKeeperService.hands
-			#scoreKeeperService.clearState()
-			#screenService.replace 'scoresSubmitted'
+			scoreKeeperService.submitScores()
+			screenService.replace 'scoresSubmitted'
 
 		$scope.nextOut = ->
 			return null unless $scope.hasAnyHands()
