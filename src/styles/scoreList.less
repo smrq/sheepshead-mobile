@@ -8,8 +8,8 @@
 		.col-doubler { padding: 0; }
 		.col-score { width: 13.5%; }
 
+		.win { color: @brand-success; }
 		.set { color: @brand-danger; }
-		.not-set { color: @brand-success; }
 
 		.picker {
 			font-weight: bold;
@@ -34,9 +34,13 @@
 			}
 		}
 
-		.leaster {
+		.leaster-primary {
 			font-weight: bold;
 			&:after { content: "L"; vertical-align: super; font-size: 75%; position: absolute; }
+		}
+
+		.leaster-secondary {
+			&:after { content: "L"; vertical-align: super; font-size: 60%; position: absolute; }
 		}
 
 		.misplay {

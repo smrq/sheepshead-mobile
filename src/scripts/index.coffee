@@ -1,11 +1,10 @@
 angular = require 'angular'
 attachFastclick = require 'fastclick'
+_ = require 'underscore'
 
 require 'angular-animate'
 require 'angular-bootstrap'
 require 'angular-route'
-
-require 'underscore'
 require './underscoreExt'
 
 unless inBrowser
@@ -14,7 +13,7 @@ unless inBrowser
 m = angular.module 'app', ['ngRoute', 'ngAnimate', 'ui.bootstrap'],
 	($routeProvider, $httpProvider) ->
 		require('./setupRoutes')($routeProvider)
-		require('./setupHttpProvider')($httpProvider)
+		# require('./setupHttpProvider')($httpProvider)
 
 require('./controllers/mainCtrl')(m)
 require('./controllers/selectPlayersCtrl')(m)
@@ -35,6 +34,8 @@ window.testData =
 		scope = angular.element(document).scope().$$childHead.$$childHead
 		scope.$apply ->
 			scope.players = ['Jacob Buysse','Blake Adams','Ben Dixon','Greg Smith','Ezra McNichols','Anne Sechtig'].map (name) -> {name}
+
+window._ = _
 
 document.addEventListener "deviceready", ->
 	angular.bootstrap document, ['app']

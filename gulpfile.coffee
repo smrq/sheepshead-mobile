@@ -20,9 +20,9 @@ watch = require 'gulp-watch'
 BUILD_FOLDER = './phonegap-build/www/'
 EXPRESS_PORT = 4000
 CONTENT_GLOB = 'src/res/**/*'
-STYLES_GLOB =  'src/styles/*.less'
-SCRIPTS_GLOB = 'src/scripts/*.coffee'
-MARKUP_GLOB =  'src/markup/*.jade'
+STYLES_GLOB =  'src/styles/**/*.less'
+SCRIPTS_GLOB = 'src/scripts/**/*.coffee'
+MARKUP_GLOB =  'src/markup/**/*.jade'
 MAIN_SCRIPT =  'src/scripts/index.coffee'
 
 startExpress = ->
@@ -32,8 +32,8 @@ startExpress = ->
 	app.get '/phonegap.js', (req, res) -> res.sendfile './bower_components/phonegap-desktop/js/phonegap-desktop.js'
 	app.get '/debugdata.json', (req, res) -> res.sendfile './bower_components/phonegap-desktop/debugdata.json'
 	app.get '/remote.js', (req, res) -> res.sendfile './proxyRemote.js'
-	app.all '/sheepshead.cgi', (req, res) ->
-		proxy.web req, res, { target: 'http://sheepshead.overmangroup.com:80' }
+	#app.all '/sheepshead.cgi', (req, res) ->
+	#	proxy.web req, res, { target: 'http://sheepshead.overmangroup.com:80' }
 	app.use express.static path.join __dirname, BUILD_FOLDER
 	app.listen EXPRESS_PORT
 

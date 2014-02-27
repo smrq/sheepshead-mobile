@@ -5,30 +5,32 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 
 .content.score-hand
 	.row
-		.col-xs-4: button.btn(ng-click="toggleWasDoubler()" ng-class="{'toggled': handInfo.wasDoubler}") Doubler
-		.col-xs-4: button.btn(ng-click="toggleWasLeaster()" ng-class="{'toggled': handInfo.wasLeaster}") Leaster
-		.col-xs-4: button.btn(ng-click="toggleWasMisplay()" ng-class="{'toggled': handInfo.wasMisplay}") Misplay
-	.row.player(ng-repeat="player in players()")
+		.col-xs-4: button.btn(ng-click="toggleDoubler()" ng-class="{toggled: isDoubler()}") Doubler
+		.col-xs-4: button.btn(ng-click="toggleLeaster()" ng-class="{toggled: isLeaster()}") Leaster
+		.col-xs-4: button.btn(ng-click="toggleMisplay()" ng-class="{toggled: isMisplay()}") Misplay
+	.row.player(ng-repeat="player in players")
 		.col-xs-6: .name {{player.name}}
 		.col-xs-6
-			.player-buttons(ng-show="wasNormalGame()")
+			.player-buttons(ng-show="isNormalGame()")
 				.btn-group
-					button.btn.score-button(ng-click="togglePicker(player.name)" ng-class="{'toggled': player.name === handInfo.picker, 'set': handInfo.wasSet}") P
-					button.btn.score-button(ng-click="togglePartner(player.name)" ng-class="{'toggled': player.name === handInfo.partner, 'set': handInfo.wasSet}") ∗
-				button.btn.score-button(ng-click="toggleOut(player.name)" ng-class="{'toggled': player.name === handInfo.whoWasOut, 'set': handInfo.wasSet}") Out
-			.player-buttons(ng-show="handInfo.wasLeaster")
-				button.btn(ng-click="toggleLeasterWinner(player.name)" ng-class="{'toggled': player.name === handInfo.whoWonLeaster}") Won
-				button.btn(ng-click="toggleOut(player.name)" ng-class="{'toggled': player.name === handInfo.whoWasOut}") Out
-			.player-buttons(ng-show="handInfo.wasMisplay")
-				button.btn(ng-click="toggleMisplayer(player.name)" ng-class="{'toggled': player.name === handInfo.whoMisplayed}") MP
-				button.btn(ng-click="toggleOut(player.name)" ng-class="{'toggled': player.name === handInfo.whoWasOut}") Out
-	.row(ng-show="wasNormalGame()")
-		.col-xs-12: button.btn.set-button(ng-click="toggleSet()" ng-class="{'toggled': handInfo.wasSet}")
-			| {{handInfo.wasSet ? 'Set' : 'Win'}}
-	.row(ng-show="wasNormalGame()")
-		.col-xs-4: button.btn.score-button(ng-click="setSchneider()" ng-class="{'toggled': wasSchneider(), 'set': handInfo.wasSet}")
+					button.btn.score-button(ng-click="togglePicker($index)" ng-class="{toggled: isPicker($index), win: isWin()}") P
+					button.btn.score-button(ng-click="togglePartner($index)" ng-class="{toggled: isPartner($index), win: isWin()}") ∗
+				button.btn.score-button(ng-click="toggleOut($index)" ng-class="{toggled: isOut($index), win: isWin()}") Out
+			.player-buttons(ng-show="isLeaster()")
+				.btn-group
+					button.btn(ng-click="toggleLeasterPrimary($index)" ng-class="{toggled: isLeasterPrimary($index)}") L
+					button.btn.little-leaster(ng-click="toggleLeasterSecondary($index)" ng-class="{toggled: isLeasterSecondary($index)}") 2nd
+				button.btn(ng-click="toggleOut($index)" ng-class="{toggled: isOut($index)}") Out
+			.player-buttons(ng-show="isMisplay()")
+				button.btn(ng-click="toggleMisplayLoser($index)" ng-class="{toggled: isMisplayLoser($index)}") MP
+				button.btn(ng-click="toggleOut($index)" ng-class="{toggled: isOut($index) }") Out
+	.row(ng-show="isNormalGame()")
+		.col-xs-12: button.btn.win-button(ng-click="toggleWin()" ng-class="{win: isWin()}")
+			| {{isWin() ? 'Win' : 'Set'}}
+	.row(ng-show="isNormalGame()")
+		.col-xs-4: button.btn.score-button(ng-click="toggleSchneider()" ng-class="{toggled: isSchneider(), win: isWin()}")
 			div Schneider
-		.col-xs-4: button.btn.score-button(ng-click="setNoSchneider()" ng-class="{'toggled': handInfo.wasNoSchneider, 'set': handInfo.wasSet}")
+		.col-xs-4: button.btn.score-button(ng-click="toggleNoSchneider()" ng-class="{toggled: isNoSchneider(), win: isWin()}")
 			div No Schneider
-		.col-xs-4: button.btn.score-button(ng-click="setNoTrick()" ng-class="{'toggled': handInfo.wasNoTrick, 'set': handInfo.wasSet}")
+		.col-xs-4: button.btn.score-button(ng-click="toggleNoTricker()" ng-class="{toggled: isNoTricker(), win: isWin()}")
 			div No Trick

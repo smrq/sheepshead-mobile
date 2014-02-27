@@ -3,17 +3,45 @@ _ = require 'underscore'
 module.exports = (m) ->
 	m.controller 'ScoreListCtrl', ($scope, screenService, scoreKeeperService, webService) ->
 
-		$scope.players = ->
-			scoreKeeperService.players()
-		$scope.hands = ->
-			scoreKeeperService.hands()
+		$scope.scoreKeeperService = scoreKeeperService
+
+		$scope.players = scoreKeeperService.players
+		$scope.hands = scoreKeeperService.scoreTable()
+		$scope.$watch 'scoreKeeperService.hands', ->
+			$scope.hands = scoreKeeperService.scoreTable()
+
+		$scope.isWin = (hand) ->
+			hand.handType is 'normal' and hand.score.win
+
+		$scope.isSet = (hand) ->
+			hand.handType is 'normal' and not hand.score.win
+
+		$scope.isPicker = (hand, index) ->
+			hand.handType is 'normal' and hand.score.pickerPlayerIndex is index
+
+		$scope.isPartner = (hand, index) ->
+			hand.handType is 'normal' and hand.score.partnerPlayerIndex is index
+
+		$scope.isOut = (hand, index) ->
+			index not in hand.playerIndices
+
+		$scope.isLeasterPrimary = (hand, index) ->
+			hand.handType is 'leaster' and hand.score.primaryPlayerIndex is index
+
+		$scope.isLeasterSecondary = (hand, index) ->
+			hand.handType is 'leaster' and hand.score.secondaryPlayerIndex is index
+
+		$scope.isMisplayLoser = (hand, index) ->
+			hand.handType is 'misplay' and hand.score.loserPlayerIndex is index
+
 		$scope.addScore = ->
-			screenService.push 'scoreHand', { whoWasOut: $scope.nextOut() }
+			screenService.push 'scoreHand', { outPlayers: $scope.nextOut() }
+
 		$scope.undoScore = ->
 			scoreKeeperService.removeLastHand()
 
 		$scope.hasAnyHands = ->
-			$scope.hands().length > 0
+			$scope.hands.length > 0
 
 		$scope.submitFinalScores = ->
 			navigator.notification.confirm 'Submit scores for this game?',
@@ -23,23 +51,13 @@ module.exports = (m) ->
 
 		submitFinalScoresCallback = (button) ->
 			return unless button is 1
-
-			players = $scope.players()
-			hands = $scope.hands()
-			lastHand = hands.slice(-1)[0]
-
-			webService.postScores players, hands
-
-			scoreKeeperService.clearState()
-			screenService.replace 'scoresSubmitted'
+			webService.postScores scoreKeeperService.players, scoreKeeperService.hands
+			#scoreKeeperService.clearState()
+			#screenService.replace 'scoresSubmitted'
 
 		$scope.nextOut = ->
-			hands = $scope.hands()
-			return null if hands.length is 0
-			lastHand = hands.slice(-1)[0]
-			lastOut = _.findObj lastHand.scores, (score) -> score.wasOut
-			return null unless lastOut?
-			players = $scope.players()
-			indexOfLastOut = _.indexOf _.map(players, (p) -> p.name), lastOut
-			indexOfNextOut = (indexOfLastOut + 1) % players.length
-			return players[indexOfNextOut].name
+			return null unless $scope.hasAnyHands()
+			lastHand = $scope.hands.slice(-1)[0]
+			lastOut = _.difference [0...$scope.players.length], lastHand.playerIndices
+			return null unless lastOut.length is 1
+			return [(lastOut[0] + 1) % $scope.players.length]

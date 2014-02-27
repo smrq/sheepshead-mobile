@@ -19,14 +19,17 @@
 	.btn.toggled {
 		.btn-primary;
 		&.score-button {
-			.btn-success;
-			&.set { .btn-danger; }
+			.btn-danger;
+			&.win { .btn-success; }
 		}
 	}
 
-	.btn.set-button {
-		width: 100%;
-		.btn-success;
-		&.toggled { .btn-danger; }
+	.btn.win-button {
+		.btn-danger;
+		&.win { .btn-success; }
+	}
+
+	.little-leaster {
+		font-size: 60%;
 	}
 }

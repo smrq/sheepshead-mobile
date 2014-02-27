@@ -1,135 +1,180 @@
 _ = require 'underscore'
 
-createHandInfo = (data) ->
-	handInfo = _.extend {}, data
-	handInfo.whoWasOut ?= null
-	handInfo.wasMisplay ?= false
-	handInfo.whoMisplayed ?= null
-	handInfo.wasLeaster ?= false
-	handInfo.whoWonLeaster ?= null
-	handInfo.wasDoubler ?= false
-	handInfo.picker ?= null
-	handInfo.partner ?= null
-	handInfo.wasSet ?= false
-	handInfo.wasNoTrick ?= false
-	handInfo.wasNoSchneider ?= false
-	return handInfo
-
 module.exports = (m) ->
 	m.controller 'ScoreHandCtrl', ($scope, screenService, scoreKeeperService) ->
 
-		$scope.handInfo = createHandInfo screenService.data()
+		handInfo =
+			outPlayers: screenService.data().outPlayers ? []
+			doubler: false
+			handType: 'normal'
+			normalScore:
+				win: true
+				scoreTier: null
+				pickerPlayerIndex: null
+				partnerPlayerIndex: null
+			leasterScore:
+				primaryPlayerIndex: null
+				secondaryPlayerIndex: null
+			misplayScore:
+				loserPlayerIndex: null
+
+		setNotOut = (index) ->
+			handInfo.outPlayers = _.without handInfo.outPlayers, index
+		setNotPicker = (index) ->
+			if handInfo.normalScore.pickerPlayerIndex is index
+				handInfo.normalScore.pickerPlayerIndex = null
+		setNotPartner = (index) ->
+			if handInfo.normalScore.partnerPlayerIndex is index
+				handInfo.normalScore.partnerPlayerIndex = null
+		setNotLeasterPrimary = (index) ->
+			if handInfo.leasterScore.primaryPlayerIndex is index
+				handInfo.leasterScore.primaryPlayerIndex = null
+		setNotLeasterSecondary = (index) ->				
+			if handInfo.leasterScore.secondaryPlayerIndex is index
+				handInfo.leasterScore.secondaryPlayerIndex = null
+		setNotMisplayLoser = (index) ->
+			if handInfo.misplayScore.loserPlayerIndex is index
+				handInfo.misplayScore.loserPlayerIndex = null
+		playerCountIsCorrect = ->
+			$scope.players.length - handInfo.outPlayers.length is 5
 		
-		$scope.players = -> scoreKeeperService.players()
 
-		$scope.toggleWasDoubler = ->
-			$scope.handInfo.wasDoubler = not $scope.handInfo.wasDoubler
+		$scope.players = scoreKeeperService.players
 
-		$scope.toggleWasLeaster = ->
-			$scope.handInfo.wasLeaster = not $scope.handInfo.wasLeaster
-			if $scope.handInfo.wasLeaster
-				$scope.handInfo.wasMisplay = false
+		$scope.isNormalGame = ->
+			handInfo.handType is 'normal'
 
-		$scope.toggleWasMisplay = ->
-			$scope.handInfo.wasMisplay = not $scope.handInfo.wasMisplay
-			if $scope.handInfo.wasMisplay
-				$scope.handInfo.wasLeaster = false
+		$scope.isDoubler = ->
+			handInfo.doubler
+		$scope.toggleDoubler = ->
+			handInfo.doubler = not handInfo.doubler
 
-		$scope.togglePicker = (name) ->
-			if $scope.handInfo.picker is name
-				$scope.handInfo.picker = null
+		$scope.isLeaster = ->
+			handInfo.handType is 'leaster'
+		$scope.toggleLeaster = ->
+			handInfo.handType =
+				if $scope.isLeaster() then 'normal' else 'leaster'
+
+		$scope.isMisplay = ->
+			handInfo.handType is 'misplay'
+		$scope.toggleMisplay = ->
+			handInfo.handType =
+				if $scope.isMisplay() then 'normal' else 'misplay'
+
+		$scope.isPicker = (index) ->
+			handInfo.normalScore.pickerPlayerIndex is index
+		$scope.togglePicker = (index) ->
+			if $scope.isPicker index
+				handInfo.normalScore.pickerPlayerIndex = null
 			else
-				$scope.handInfo.picker = name
-				$scope.handInfo.whoWasOut = null if $scope.handInfo.whoWasOut is name
+				handInfo.normalScore.pickerPlayerIndex = index
+				setNotOut index
 
-		$scope.togglePartner = (name) ->
-			if $scope.handInfo.partner is name
-				$scope.handInfo.partner = null
+		$scope.isPartner = (index) ->
+			handInfo.normalScore.partnerPlayerIndex is index
+		$scope.togglePartner = (index) ->
+			if $scope.isPartner index
+				handInfo.normalScore.partnerPlayerIndex = null
 			else
-				$scope.handInfo.partner = name
-				$scope.handInfo.whoWasOut = null if $scope.handInfo.whoWasOut is name
+				handInfo.normalScore.partnerPlayerIndex = index
+				setNotOut index
 
-		$scope.toggleLeasterWinner = (name) ->
-			if $scope.handInfo.whoWonLeaster is name
-				$scope.handInfo.whoWonLeaster = null
+		$scope.isLeasterPrimary = (index) ->
+			handInfo.leasterScore.primaryPlayerIndex is index
+		$scope.toggleLeasterPrimary = (index) ->
+			if $scope.isLeasterPrimary index
+				handInfo.leasterScore.primaryPlayerIndex = null
 			else
-				$scope.handInfo.whoWonLeaster = name
-				$scope.handInfo.whoWasOut = null if $scope.handInfo.whoWasOut is name
+				handInfo.leasterScore.primaryPlayerIndex = index
+				setNotLeasterSecondary index
+				setNotOut index
 
-		$scope.toggleMisplayer = (name) ->
-			if $scope.handInfo.whoMisplayed is name
-				$scope.handInfo.whoMisplayed = null
+		$scope.isLeasterSecondary = (index) ->
+			handInfo.leasterScore.secondaryPlayerIndex is index
+		$scope.toggleLeasterSecondary = (index) ->
+			if $scope.isLeasterSecondary index
+				handInfo.leasterScore.secondaryPlayerIndex = null
 			else
-				$scope.handInfo.whoMisplayed = name
-				$scope.handInfo.whoWasOut = null if $scope.handInfo.whoWasOut is name
+				handInfo.leasterScore.secondaryPlayerIndex = index
+				setNotLeasterPrimary index
+				setNotOut index
 
-		$scope.toggleOut = (name) ->
-			if $scope.handInfo.whoWasOut is name
-				$scope.handInfo.whoWasOut = null
+		$scope.isMisplayLoser = (index) ->
+			handInfo.misplayScore.loserPlayerIndex is index
+		$scope.toggleMisplayLoser = (index) ->
+			if $scope.isMisplayLoser index
+				handInfo.misplayScore.loserPlayerIndex = null
 			else
-				$scope.handInfo.whoWasOut = name
-				$scope.handInfo.picker = null if $scope.handInfo.picker is name
-				$scope.handInfo.partner = null if $scope.handInfo.partner is name
-				$scope.handInfo.whoWonLeaster = null if $scope.handInfo.whoWonLeaster is name
-				$scope.handInfo.whoMisplayed = null if $scope.handInfo.whoMisplayed is name
+				handInfo.misplayScore.loserPlayerIndex = index
+				setNotOut index
 
-		$scope.toggleSet = ->
-			$scope.handInfo.wasSet = not $scope.handInfo.wasSet
+		$scope.isOut = (index) ->
+			index in handInfo.outPlayers
+		$scope.toggleOut = (index) ->
+			if $scope.isOut index
+				setNotOut index
+			else
+				handInfo.outPlayers.push index
+				setNotPicker index
+				setNotPartner index
+				setNotLeasterPrimary index
+				setNotLeasterSecondary index
+				setNotMisplayLoser index
 
-		$scope.setNoTrick = ->
-			$scope.handInfo.wasNoTrick = true
-			$scope.handInfo.wasNoSchneider = false
+		$scope.isWin = ->
+			handInfo.normalScore.win
+		$scope.toggleWin = ->
+			handInfo.normalScore.win = not handInfo.normalScore.win
 
-		$scope.setNoSchneider = ->
-			$scope.handInfo.wasNoSchneider = true
-			$scope.handInfo.wasNoTrick = false
+		$scope.isNoTricker = ->
+			handInfo.normalScore.scoreTier is 'noTricker'
+		$scope.toggleNoTricker = ->
+			handInfo.normalScore.scoreTier =
+				if $scope.isNoTricker() then null else 'noTricker'
 
-		$scope.setSchneider = ->
-			$scope.handInfo.wasNoTrick = false
-			$scope.handInfo.wasNoSchneider = false
+		$scope.isNoSchneider = ->
+			handInfo.normalScore.scoreTier is 'noSchneider'
+		$scope.toggleNoSchneider = ->
+			handInfo.normalScore.scoreTier =
+				if $scope.isNoSchneider() then null else 'noSchneider'
 
-		$scope.wasNormalGame = ->
-			not $scope.handInfo.wasLeaster and not $scope.handInfo.wasMisplay
-
-		$scope.wasSchneider = ->
-			not $scope.handInfo.wasNoSchneider and not $scope.handInfo.wasNoTrick
+		$scope.isSchneider = ->
+			handInfo.normalScore.scoreTier is 'schneider'
+		$scope.toggleSchneider = ->
+			handInfo.normalScore.scoreTier =
+				if $scope.isSchneider() then null else 'schneider'
 
 		$scope.canSubmitNormalGame = ->
-			$scope.handInfo.picker? and
-			$scope.handInfo.partner? and
-			$scope.handInfo.whoWasOut? and
-			$scope.handInfo.whoWasOut isnt $scope.handInfo.picker and
-			$scope.handInfo.whoWasOut isnt $scope.handInfo.partner
+			handInfo.normalScore.scoreTier? and
+			handInfo.normalScore.pickerPlayerIndex? and
+			handInfo.normalScore.partnerPlayerIndex? and
+			handInfo.normalScore.pickerPlayerIndex not in handInfo.outPlayers and
+			handInfo.normalScore.partnerPlayerIndex not in handInfo.outPlayers
 
 		$scope.canSubmitLeaster = ->
-			$scope.handInfo.whoWonLeaster? and
-			$scope.handInfo.whoWasOut? and
-			$scope.handInfo.whoWasOut isnt $scope.handInfo.whoWonLeaster
+			handInfo.leasterScore.primaryPlayerIndex? and
+			handInfo.leasterScore.primaryPlayerIndex not in handInfo.outPlayers and
+			handInfo.leasterScore.secondaryPlayerIndex not in handInfo.outPlayers
 
 		$scope.canSubmitMisplay = ->
-			$scope.handInfo.whoMisplayed? and
-			$scope.handInfo.whoWasOut? and
-			$scope.handInfo.whoWasOut isnt $scope.handInfo.whoMisplayed
+			handInfo.misplayScore.loserPlayerIndex? and
+			handInfo.misplayScore.loserPlayerIndex not in handInfo.outPlayers
 
 		$scope.canSubmit = ->
-			$scope.wasNormalGame() and $scope.canSubmitNormalGame() or
-			$scope.handInfo.wasLeaster and $scope.canSubmitLeaster() or
-			$scope.handInfo.wasMisplay and $scope.canSubmitMisplay()
+			playerCountIsCorrect() and (
+				$scope.isNormalGame() and $scope.canSubmitNormalGame() or
+				$scope.isLeaster() and $scope.canSubmitLeaster() or
+				$scope.isMisplay() and $scope.canSubmitMisplay()
+			)
 
 		$scope.submitScore = ->
-			finalize $scope.handInfo
-			scoreKeeperService.scoreHand $scope.handInfo
+			scoreKeeperService.scoreHand
+				playerIndices: _.difference [0...$scope.players.length], handInfo.outPlayers
+				leadPlayerIndex: (handInfo.outPlayers[0] + 1) % $scope.players.length # TODO: this is shit logic, revisit once lead player UI exists
+				doubler: handInfo.doubler
+				handType: handInfo.handType
+				score: switch handInfo.handType
+					when 'normal' then handInfo.normalScore
+					when 'leaster' then handInfo.leasterScore
+					when 'misplay' then handInfo.misplayScore
 			screenService.pop()
-
-		finalize = (handInfo) ->
-			if handInfo.wasLeaster or handInfo.wasMisplay
-				handInfo.picker = null
-				handInfo.partner = null
-				handInfo.wasSet = false
-				handInfo.wasNotSet = false
-				handInfo.wasNoTrick = false
-				handInfo.wasNoSchneider = false
-			unless handInfo.wasLeaster
-				handInfo.whoWonLeaster = null
-			unless handInfo.wasMisplay
-				handInfo.whoMisplayed = null

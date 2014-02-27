@@ -1,154 +1,113 @@
+_ = require 'underscore'
+
 module.exports = (m) ->
 	m.factory 'scoreKeeperService', ($window) ->
-		players = []
-		hands = []
-
 		abbreviate = (name) ->
 			name.split ' '
 				.map (w) -> w[0]
 				.join ''
 				.toUpperCase()
 
-		scoreForPlayer = (name, handInfo) ->
-			score = scoreForPlayer_ name, handInfo
-			if handInfo.wasDoubler
-				score.dValue *= 2
-			value = if hands.length is 0 then 0 else hands[hands.length-1].scores[name].value
-			score.value = value + score.dValue
-			return score
-
-		scoreForPlayer_ = (name, handInfo) ->
-			score = { dValue: 0, wasPicker: false, wasPartner: false, wasOut: false, wonLeaster: false, misplayed: false }
-
-			if handInfo.whoWasOut is name
-				score.wasOut = true
-				return score
-
-			if handInfo.wasMisplay
-				if handInfo.whoMisplayed is name
-					score.dValue = -4
-					score.misplayed = true
-				else
-					score.dValue = 1
-				return score
-
-			if handInfo.wasLeaster
-				if handInfo.whoWonLeaster is name
-					score.dValue = 4
-					score.wonLeaster = true
-				else
-					score.dValue = -1
-				return score
-
-			score.wasPicker = true if handInfo.picker is name
-			score.wasPartner = true if handInfo.partner is name
-
-			if handInfo.wasSet
-				if handInfo.wasNoTrick
-					if score.wasPicker and score.wasPartner
-						score.dValue = -24
-					else if score.wasPicker
-						score.dValue = -12
-					else if score.wasPartner
-						score.dValue = -6
-					else
-						score.dValue = 6
-				else if handInfo.wasNoSchneider
-					if score.wasPicker and score.wasPartner
-						score.dValue = -16
-					else if score.wasPicker
-						score.dValue = -8
-					else if score.wasPartner
-						score.dValue = -4
-					else
-						score.dValue = 4
-				else
-					if score.wasPicker and score.wasPartner
-						score.dValue = -8
-					else if score.wasPicker
-						score.dValue = -4
-					else if score.wasPartner
-						score.dValue = -2
-					else
-						score.dValue = 2
-			else
-				if handInfo.wasNoTrick
-					if score.wasPicker and score.wasPartner
-						score.dValue = 12
-					else if score.wasPicker
-						score.dValue = 6
-					else if score.wasPartner
-						score.dValue = 3
-					else
-						score.dValue = -3
-				else if handInfo.wasNoSchneider
-					if score.wasPicker and score.wasPartner
-						score.dValue = 8
-					else if score.wasPicker
-						score.dValue = 4
-					else if score.wasPartner
-						score.dValue = 2
-					else
-						score.dValue = -2
-				else
-					if score.wasPicker and score.wasPartner
-						score.dValue = 4
-					else if score.wasPicker
-						score.dValue = 2
-					else if score.wasPartner
-						score.dValue = 1
-					else
-						score.dValue = -1
-
-			return score
-
 		calculatePointSpread = (scores) ->
-			negative = 0
-			positive = 0
-			for name, score of scores
-				if score.value > 0 then positive += score.value
-				else negative -= score.value
-			return positive if positive is negative
-			throw 'ERROR: Point spread did not match up.'
+			positivePointSpread = _.sum _.filter scores, (s) -> s > 0
+			negativePointSpread = _.sum _.filter scores, (s) -> s < 0
+			if positivePointSpread + negativePointSpread isnt 0
+				throw 'Point spread did not match'
+			positivePointSpread
 
-		service =
+		calculateHandScore = (previousScores, hand) ->
+			winningShares = null
+			losingShares = null
+			pointsPaid = 1
+
+			switch hand.handType
+				when 'normal'
+					offenseShares =
+						if hand.score.pickerPlayerIndex is hand.score.partnerPlayerIndex
+							_.repeat hand.score.pickerPlayerIndex, 4
+						else
+							_.repeat hand.score.pickerPlayerIndex, 2
+								.concat hand.score.partnerPlayerIndex
+					defenseShares = _.without hand.playerIndices, hand.score.pickerPlayerIndex, hand.score.partnerPlayerIndex
+
+					if hand.score.win
+						winningShares = offenseShares
+						losingShares = defenseShares
+					else
+						winningShares = defenseShares
+						losingShares = offenseShares
+						pointsPaid *= 2
+
+					switch hand.score.scoreTier
+						when 'noSchneider' then pointsPaid *= 2
+						when 'noTricker' then pointsPaid *= 3
+
+				when 'leaster'
+					winningShares =
+						unless hand.score.secondaryPlayerIndex?
+							_.repeat hand.score.primaryPlayerIndex, 4
+						else
+							_.repeat hand.score.primaryPlayerIndex, 2
+								.concat hand.score.secondaryPlayerIndex
+					losingShares = _.without hand.playerIndices, hand.score.primaryPlayerIndex, hand.score.secondaryPlayerIndex
+
+				when 'misplay'
+					losingShares = _.repeat hand.score.loserPlayerIndex, 4
+					winningShares = _.without hand.playerIndices, hand.score.loserPlayerIndex
+
+				else throw 'Unexpected hand type'
+
+			if hand.doubler
+				pointsPaid *= 2
+
+			if winningShares.length isnt losingShares.length
+				throw 'Payment count did not match'
+
+			currentScores = (n for n in previousScores)
+			for share in winningShares
+				currentScores[share] += pointsPaid
+			for share in losingShares
+				currentScores[share] -= pointsPaid
+
+			return currentScores
+
+		return {
+			players: []
+			hands: []
+
 			startGame: (names) ->
-				players = for name in names
+				@players = for name in names
 					{ name: name, abbreviation: abbreviate name }
-				hands = []
+				@hands = []
 				@saveState()
 
-			scoreHand: (handInfo) ->
-				scores = {}
-				for player in players
-					scores[player.name] = scoreForPlayer player.name, handInfo
-				hands.push
-					scores: scores
-					pointSpread: calculatePointSpread scores
-					wasSet: handInfo.wasSet
-					wasNotSet: not (handInfo.wasSet or handInfo.wasLeaster or handInfo.wasMisplay)
-					wasDoubler: handInfo.wasDoubler
+			scoreHand: (hand) ->
+				@hands.push hand
 				@saveState()
 
 			removeLastHand: ->
-				hands.pop()
+				@hands.pop()
 				@saveState()
 
-			players: -> players
-			hands: -> hands
+			scoreTable: ->
+				cumulativeScoresList = _.scan @hands, calculateHandScore, _.repeat 0, @players.length
+				_.zipWith @hands, cumulativeScoresList, (hand, cumulativeScores) ->
+					_.extend {}, hand, { cumulativeScores, pointSpread: calculatePointSpread cumulativeScores }
+
+			finalScores: ->
+				cumulativeScores = _.reduce @hands, calculateHandScore, _.repeat 0, @players.length
+				{ cumulativeScores, pointSpread: calculatePointSpread cumulativeScores }
 
 			saveState: ->
-				$window.localStorage.setItem 'scoreKeeperService', JSON.stringify { players, hands }
+				$window.localStorage.setItem 'scoreKeeperService', JSON.stringify { @players, @hands }
 
 			loadState: ->
 				data = $window.localStorage.getItem 'scoreKeeperService'
-				{ players, hands } = JSON.parse data if data?
+				{ @players, @hands } = JSON.parse data if data?
 
 			clearState: ->
 				$window.localStorage.removeItem 'scoreKeeperService'
 
 			hasSavedState: ->
 				$window.localStorage.getItem('scoreKeeperService')?
-
-		service.loadState()
-		return service
+		}
