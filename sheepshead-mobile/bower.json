@@ -14,5 +14,9 @@
     "angular-animate": "~1.2.12",
     "bootstrap": "~3.1.0",
     "angular-bootstrap": "~0.10.0"
+  },
+  "dependencies": {
+    "underscore": "~1.6.0",
+    "fastclick": "~1.0.0"
   }
 }

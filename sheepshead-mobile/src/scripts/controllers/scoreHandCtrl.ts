@@ -1,12 +1,10 @@
 ﻿/// <reference path="../references.ts" />
-import _ = require('underscore');
-
-export = ScoreHandCtrl;
-class ScoreHandCtrl {
-	constructor(
-		private $scope: app.IScoreHandScope,
-		private scoreKeeperService: app.IScoreKeeperService,
-		private screenService: app.IScreenService) {
+module app {
+	angular.module('app').controller('scoreHandCtrl', ScoreHandCtrl);
+	export function ScoreHandCtrl(
+		$scope: app.IScoreHandScope,
+		scoreKeeperService: app.IScoreKeeperService,
+		screenService: app.IScreenService) {
 
 		var handInfo = {
 			outPlayers: <number[]>(screenService.data().outPlayers || []),

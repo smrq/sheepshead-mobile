@@ -1,13 +1,11 @@
 ﻿/// <reference path="../references.ts" />
-import _ = require('underscore');
-
-export = SelectPlayersCtrl;
-class SelectPlayersCtrl {
-	constructor(
-		private $scope: app.ISelectPlayersScope,
-		private scoreKeeperService: app.IScoreKeeperService,
-		private screenService: app.IScreenService,
-		private webService: app.IWebService) {
+module app {
+	angular.module('app').controller('selectPlayersCtrl', SelectPlayersCtrl);
+	export function SelectPlayersCtrl(
+		$scope: app.ISelectPlayersScope,
+		scoreKeeperService: app.IScoreKeeperService,
+		screenService: app.IScreenService,
+		webService: app.IWebService) {
 
 		$scope.players = _.repeat(() => ({ name: '' }), 6).map(f => f());
 		$scope.getNames = function (value: string) {

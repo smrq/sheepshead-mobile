@@ -13,28 +13,29 @@ module.exports = function (grunt) {
 				compile: true,
 				target: "es5",
 				module: "commonjs",
-				sourceMap: true,
+				sourcemap: true,
 				ignoreTypeCheck: false
 			},
 			scripts: {
 				src: ["src/scripts/**/*.ts"],
-				dest: "tmp_scripts/typescript",
+				dest: "tmp_scripts/src",
 				options: { base_path: "src/scripts" }
 			}
 		},
 
-		browserify: {
+		concat_sourcemap: {
 			options: {
-				transform: ['brfs'],
-				shim: {
-					'angular': { path: 'bower_components/angular/angular.js', exports: 'angular' },
-					'angular-animate': { path: 'bower_components/angular-animate/angular-animate.js', exports: 'angular' },
-					'angular-bootstrap': { path: 'bower_components/angular-bootstrap/ui-bootstrap-tpls.js', exports: 'angular' },
-					'angular-route': { path: 'bower_components/angular-route/angular-route.js', exports: 'angular' }
-				}
+				sourcesContent: true
 			},
 			scripts: {
-				files: { "phonegap-build/www/bundle.js": ["tmp_scripts/typescript/index.js"] }
+				files: {
+					"phonegap-build/www/bundle.js": [
+						"tmp_scripts/vendor/angular.js",
+						"tmp_scripts/vendor/**/*.js",
+						"tmp_scripts/src/index.js",
+						"tmp_scripts/src/**/*.js"
+					]
+				}
 			}
 		},
 
@@ -53,6 +54,24 @@ module.exports = function (grunt) {
 		copy: {
 			content: {
 				files: [{ expand: true, cwd: "src/content", src:["**"], dest: "phonegap-build/www" }]
+			},
+
+			scripts: {
+				files: [
+					{
+						expand: true,
+						src: [
+							"bower_components/angular/angular.js",
+							"bower_components/angular-animate/angular-animate.js",
+							"bower_components/angular-bootstrap/ui-bootstrap-tpls.js",
+							"bower_components/angular-route/angular-route.js",
+							"bower_components/fastclick/lib/fastclick.js",
+							"bower_components/underscore/underscore.js"
+						],
+						dest: 'tmp_scripts/vendor',
+						flatten: true
+					}
+				]
 			}
 		},
 
@@ -72,7 +91,7 @@ module.exports = function (grunt) {
 
 	grunt.registerTask("content", ["copy:content"]);
 	grunt.registerTask("markup",  ["jade:markup"]);
-	grunt.registerTask("scripts", ["typescript:scripts", "browserify:scripts", "clean:tmp_scripts"]);
+	grunt.registerTask("scripts", ["typescript:scripts", "copy:scripts", "concat_sourcemap:scripts", "clean:tmp_scripts"]);
 	grunt.registerTask("styles",  ["less:styles"]);
 	grunt.registerTask("build",   ["content", "markup", "scripts", "styles"]);
 	grunt.registerTask("server",  ["express:server", "express-keepalive"]);

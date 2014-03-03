@@ -1,12 +1,10 @@
 ﻿/// <reference path="../references.ts" />
-import _ = require('underscore');
-
-export = ScoreListCtrl;
-class ScoreListCtrl {
-	constructor(
-		private $scope: app.IScoreListScope,
-		private scoreKeeperService: app.IScoreKeeperService,
-		private screenService: app.IScreenService) {
+module app {
+	angular.module('app').controller('scoreListCtrl', ScoreListCtrl);
+	export function ScoreListCtrl(
+		$scope: app.IScoreListScope,
+		scoreKeeperService: app.IScoreKeeperService,
+		screenService: app.IScreenService) {
 
 		$scope.players = scoreKeeperService.players;
 
