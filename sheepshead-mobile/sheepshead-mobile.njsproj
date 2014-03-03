@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+    <Name>sheepshead-mobile</Name>
+    <RootNamespace>sheepshead-mobile</RootNamespace>
+    <EnableTypeScript>true</EnableTypeScript>
+    <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptModuleKind>CommonJS</TypeScriptModuleKind>
+    <ScriptArguments>browse</ScriptArguments>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>f1cf4f8f-63e7-46ee-a1ad-b0e6ab25f29a</ProjectGuid>
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>node_modules\grunt-cli\bin\grunt</StartupFile>
+    <StartWebBrowser>False</StartWebBrowser>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <ProjectView>ShowAllFiles</ProjectView>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="gruntfile.js" />
+    <Compile Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\blackberry10\index.js" />
+    <Compile Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\firefoxos\notification.js" />
+    <Compile Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\windows8\NotificationProxy.js" />
+    <Compile Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\android\notification.js" />
+    <Compile Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\blackberry10\beep.js" />
+    <Compile Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\notification.js" />
+    <Compile Include="phonegap-build\www\remote.js" />
+    <Compile Include="proxyRemote.js" />
+    <Compile Include="server.js" />
+    <Content Include=".gitignore" />
+    <Content Include="2014-02-20.json" />
+    <Content Include="bower.json" />
+    <Content Include="generateIcons.sh" />
+    <Content Include="LICENSE" />
+    <Content Include="package.json" />
+    <Content Include="phonegap-build\.cordova\config.json" />
+    <Content Include="phonegap-build\platforms\.gitignore" />
+    <Content Include="phonegap-build\plugins\android.json" />
+    <Content Include="phonegap-build\plugins\ios.json" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\.fetch.json" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\doc\index.md" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\LICENSE" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\package.json" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\plugin.xml" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\README.md" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\RELEASENOTES.md" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\android\Notification.java" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\ios\CDVNotification.bundle\beep.wav" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\ios\CDVNotification.h" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\ios\CDVNotification.m" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\ubuntu\notification.cpp" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\ubuntu\notification.h" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\ubuntu\notification.qml" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\wp\notification-beep.wav" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\wp\Notification.cs" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\wp\NotificationBox.xaml" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\wp\NotificationBox.xaml.cs" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\firefoxos\danger-press.png" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\firefoxos\danger.png" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\firefoxos\default.png" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\firefoxos\gradient.png" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\firefoxos\notification.css" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\firefoxos\pattern.png" />
+    <Content Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\firefoxos\recommend.png" />
+    <Content Include="phonegap-build\www\.gitignore" />
+    <Content Include="phonegap-build\www\config.xml" />
+    <Content Include="README.md" />
+    <Content Include="src\markup\index.jade" />
+    <Content Include="src\markup\scoreHand.jade" />
+    <Content Include="src\markup\scoreList.jade" />
+    <Content Include="src\markup\scoresSubmitted.jade" />
+    <Content Include="src\markup\selectPlayers.jade" />
+    <Content Include="src\scripts\angular.d.ts" />
+    <Content Include="src\scripts\controllers\mainCtrl.ts" />
+    <Content Include="src\scripts\controllers\scoreHandCtrl.ts" />
+    <Content Include="src\scripts\controllers\scoreListCtrl.ts" />
+    <Content Include="src\scripts\controllers\scoresSubmittedCtrl.ts" />
+    <Content Include="src\scripts\controllers\selectPlayersCtrl.ts" />
+    <Content Include="src\scripts\fastclick.d.ts" />
+    <Content Include="src\scripts\fs.d.ts" />
+    <Content Include="src\scripts\index.ts" />
+    <Content Include="src\scripts\interfaces\controllers.ts" />
+    <Content Include="src\scripts\interfaces\models.ts" />
+    <Content Include="src\scripts\interfaces\services.ts" />
+    <Content Include="src\scripts\references.ts" />
+    <Content Include="src\scripts\remote.d.ts" />
+    <Content Include="src\scripts\services\scoreKeeperService.ts" />
+    <Content Include="src\scripts\services\screenService.ts" />
+    <Content Include="src\scripts\services\webService.ts" />
+    <Content Include="src\scripts\underscoreExt.d.ts" />
+    <Content Include="src\scripts\underscoreExt.ts" />
+    <Content Include="src\styles\bootstrap.less" />
+    <Content Include="src\styles\bootstrap.mixins.less" />
+    <Content Include="src\styles\bootstrap.variables.less" />
+    <Content Include="src\styles\index.less" />
+    <Content Include="src\styles\scoreHand.less" />
+    <Content Include="src\styles\scoreList.less" />
+    <Content Include="src\styles\scoresSubmitted.less" />
+    <Content Include="test.json" />
+    <Content Include="tsd.json" />
+    <Content Include="typings\angular-ui-bootstrap\angular-ui-bootstrap.d.ts" />
+    <Content Include="typings\angularjs\angular-animate.d.ts" />
+    <Content Include="typings\angularjs\angular-route.d.ts" />
+    <Content Include="typings\angularjs\angular.d.ts" />
+    <Content Include="typings\jquery\jquery.d.ts" />
+    <Content Include="typings\phonegap\phonegap.d.ts" />
+    <Content Include="typings\tsd.d.ts" />
+    <Content Include="typings\underscore\underscore.d.ts" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="phonegap-build\" />
+    <Folder Include="phonegap-build\.cordova\" />
+    <Folder Include="phonegap-build\platforms\" />
+    <Folder Include="phonegap-build\plugins\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\doc\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\android\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\blackberry10\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\firefoxos\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\ios\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\ios\CDVNotification.bundle\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\ubuntu\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\windows8\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\src\wp\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\android\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\blackberry10\" />
+    <Folder Include="phonegap-build\plugins\org.apache.cordova.dialogs\www\firefoxos\" />
+    <Folder Include="phonegap-build\www\" />
+    <Folder Include="src\" />
+    <Folder Include="src\markup\" />
+    <Folder Include="src\scripts\" />
+    <Folder Include="src\scripts\controllers\" />
+    <Folder Include="src\scripts\interfaces\" />
+    <Folder Include="src\scripts\services\" />
+    <Folder Include="src\styles\" />
+    <Folder Include="typings\" />
+    <Folder Include="typings\angular-ui-bootstrap\" />
+    <Folder Include="typings\angularjs\" />
+    <Folder Include="typings\jquery\" />
+    <Folder Include="typings\phonegap\" />
+    <Folder Include="typings\underscore\" />
+  </ItemGroup>
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

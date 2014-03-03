@@ -1,0 +1,33 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "angularjs/angular.d.ts": {
+      "commit": "0854df3b0f7187ae445453aaad2563a97b70df08"
+    },
+    "jquery/jquery.d.ts": {
+      "commit": "0854df3b0f7187ae445453aaad2563a97b70df08"
+    },
+    "underscore/underscore.d.ts": {
+      "commit": "bac5b4311465c7052467ec315d0cbb1c640a69d6"
+    },
+    "angularjs/angular-route.d.ts": {
+      "commit": "0854df3b0f7187ae445453aaad2563a97b70df08"
+    },
+    "angularjs/angular-animate.d.ts": {
+      "commit": "0854df3b0f7187ae445453aaad2563a97b70df08"
+    },
+    "angular-ui-bootstrap/angular-ui-bootstrap.d.ts": {
+      "commit": "0854df3b0f7187ae445453aaad2563a97b70df08"
+    },
+    "node/node.d.ts": {
+      "commit": "0854df3b0f7187ae445453aaad2563a97b70df08"
+    },
+    "phonegap/phonegap.d.ts": {
+      "commit": "0854df3b0f7187ae445453aaad2563a97b70df08"
+    }
+  }
+}
