@@ -14,7 +14,8 @@ module.exports = function (grunt) {
 				target: "es5",
 				module: "commonjs",
 				sourcemap: true,
-				ignoreTypeCheck: false
+				ignoreTypeCheck: false,
+				noImplicitAny: true
 			},
 			scripts: {
 				src: ["src/scripts/**/*.ts"],
