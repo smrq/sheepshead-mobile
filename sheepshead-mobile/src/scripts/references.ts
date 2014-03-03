@@ -1,7 +1,7 @@
 ﻿/// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="angular.d.ts" />
+/// <reference path="browserify.d.ts" />
 /// <reference path="fastclick.d.ts" />
-/// <reference path="fs.d.ts" />
 /// <reference path="remote.d.ts" />
 /// <reference path="underscoreExt.d.ts" />
 
