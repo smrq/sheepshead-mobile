@@ -9,8 +9,8 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 		.col-xs-4: button.btn(ng-click="toggleLeaster()" ng-class="{toggled: isLeaster()}") Leaster
 		.col-xs-4: button.btn(ng-click="toggleMisplay()" ng-class="{toggled: isMisplay()}") Misplay
 	.row.player(ng-repeat="player in players")
-		.col-xs-4: .name {{player.shortName}}
-		.col-xs-8
+		.col-xs-3: .name {{player.shortName}}
+		.col-xs-9
 			.player-buttons(ng-show="isNormalGame()")
 				.btn-group
 					button.btn.score-button(ng-click="togglePicker($index)" ng-class="{toggled: isPicker($index), win: isWin()}") P
