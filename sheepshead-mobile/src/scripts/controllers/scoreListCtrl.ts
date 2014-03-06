@@ -48,8 +48,11 @@ module app {
 				(<IHandScoreMisplay>hand.score).loserPlayerIndex === index;
 		};
 		$scope.addScore = function () {
-			$scope.$emit(Event.scoreList.addScore, $scope.nextOutAndLead());
+			$scope.$emit(Event.scoreList.addScore, parametersForNewHand($scope.hands, $scope.players.length));
 		};
+		$scope.editScore = function (index) {
+			$scope.$emit(Event.scoreList.editScore, $scope.hands[index], index);
+		}
 		$scope.undoScore = function () {
 			scoreKeeperService.removeLastHand();
 		};
@@ -66,32 +69,35 @@ module app {
 			if (button !== 1) return;
 			$scope.$emit(Event.scoreList.submitFinalScores);
 		}
-		$scope.nextOutAndLead = function () {
-			var nextOut = calculateNextOut($scope.hands, $scope.players.length);
-			var nextLead = calculateNextLead(nextOut, $scope.hands, $scope.players.length);
-			return {
-				outPlayers: nextOut,
-				leadPlayerIndex: nextLead
-			};
-		}
 	}
 
-	function calculateNextOut(hands: IHand[], playerCount: number): number[] {
+	function parametersForNewHand(hands: IHand[], playerCount: number): IHand {
+		var playerIndices = calculateNextPlayers(hands, playerCount);
+		var leadPlayerIndex = calculateNextLead(playerIndices, hands, playerCount);
+		return {
+			playerIndices: playerIndices,
+			leadPlayerIndex: leadPlayerIndex,
+			doubler: null,
+			handType: null,
+			score: null
+		};
+	}
+
+	function calculateNextPlayers(hands: IHand[], playerCount: number): number[] {
 		if (hands.length === 0)
 			return null;
 
-		var playersOut = _.last(hands, 2).map(hand => missingIndices(hand.playerIndices, playerCount))
+		if (hands.length === 1)
+			return shiftIndices(hands[0].playerIndices, playerCount);
 
-		if (playersOut.length === 1)
-			return shiftIndices(playersOut[0], playerCount);
+		var lastTwoHands = _.last(hands, 2);
+		if (_.isEqual(lastTwoHands[0].playerIndices, lastTwoHands[1].playerIndices))
+			return lastTwoHands[1].playerIndices;
 
-		if (_.isEqual(playersOut[1], playersOut[0]))
-			return playersOut[1];
-
-		return shiftIndices(playersOut[1], playerCount);
+		return shiftIndices(lastTwoHands[1].playerIndices, playerCount);
 	}
 
-	function calculateNextLead(nextOut: number[], hands: IHand[], playerCount: number): number {
+	function calculateNextLead(playerIndices: number[], hands: IHand[], playerCount: number): number {
 		if (hands.length === 0)
 			return null;
 			
@@ -100,7 +106,7 @@ module app {
 			var i = (lastLead + 1) % playerCount;
 			i !== lastLead;
 			i = (i + 1) % playerCount) {
-			if (nextOut == null || nextOut.indexOf(i) === -1)
+			if (playerIndices == null || playerIndices.indexOf(i) !== -1)
 				return i;
 		}
 		return null;
@@ -109,27 +115,22 @@ module app {
 	function automaticallyCalculatedLead(hand: IScoreTableRow, playerCount: number): number {
 		if (playerCount < 6)
 			return null;
-		var playersOut = missingIndices(hand.playerIndices, playerCount);
-		if (!areIndicesCyclicallyContiguous(playersOut, playerCount))
+		var firstIndices = findIndicesMissingCyclicPredecessor(hand.playerIndices, playerCount);
+		if (firstIndices.length !== 1)
 			return null;
-		var lastPlayerOut = playersOut.filter(i => playersOut.indexOf((i+1) % playerCount) === -1)[0];
-		return (lastPlayerOut+1) % playerCount;
-	}
-
-	function missingIndices(indices: number[], indexBound: number): number[] {
-		return _.difference(_.range(0, indexBound - 1), indices);
+		return firstIndices[0];
 	}
 
 	function shiftIndices(indices: number[], indexBound: number): number[] {
-		if (!areIndicesCyclicallyContiguous(indices, indexBound))
+		if (indices.length === indexBound)
+			return indices;
+		var firstIndices = findIndicesMissingCyclicPredecessor(indices, indexBound);
+		if (firstIndices.length !== 1)
 			return null;
 		return indices.map(i => (i+1) % indexBound);
 	}
 
-	function areIndicesCyclicallyContiguous(indices: number[], indexBound: number): boolean {
-		var indicesWithoutPredecessorInList = indices.filter(i => indices.indexOf((i-1+indexBound) % indexBound) === -1);
-		var indicesWithoutSuccessorInList = indices.filter(i => indices.indexOf((i+1) % indexBound) === -1);
-		return indicesWithoutPredecessorInList.length === 1 &&
-			indicesWithoutSuccessorInList.length === 1;
+	function findIndicesMissingCyclicPredecessor(indices: number[], indexBound: number): number[] {
+		return indices.filter(i => indices.indexOf((i-1+indexBound) % indexBound) === -1);
 	}
 }

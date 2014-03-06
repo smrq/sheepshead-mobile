@@ -23,11 +23,11 @@ module app {
 		isLeasterSecondary(hand: IScoreTableRow, index: number): boolean;
 		isMisplayLoser(hand: IScoreTableRow, index: number): boolean;
 		addScore(): void;
+		editScore(index: number): void;
 		undoScore(): void;
 		hasAnyHands(): boolean;
 		submitFinalScores(): void;
 		submitFinalScoresCallback(button: number): void;
-		nextOutAndLead(): { outPlayers: number[]; leadPlayerIndex: number; };
 	}
 
 	export interface IScoreHandScope extends ng.IScope {

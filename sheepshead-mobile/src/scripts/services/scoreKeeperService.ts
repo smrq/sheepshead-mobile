@@ -19,6 +19,11 @@ module app {
 			this.saveState();
 		}
 
+		updateHand(index: number, hand: IHand) {
+			this.hands[index] = hand;
+			this.saveState();
+		}
+
 		removeLastHand(): void {
 			this.hands.pop();
 			this.saveState();

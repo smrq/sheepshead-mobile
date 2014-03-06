@@ -10,6 +10,7 @@ module app {
 		hands: IHand[];
 		startGame(names: string[]): void;
 		scoreHand(hand: IHand): void;
+		updateHand(index: number, hand: IHand): void;
 		removeLastHand(): void;
 		scoreTable(): IScoreTableRow[];
 		finalScores(): IFinalScores;

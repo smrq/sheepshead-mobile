@@ -15,6 +15,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 
 		tbody: tr(
 			ng-repeat="hand in hands"
+			ng-click="editScore($index)"
 			ng-class="{win: isWin(hand), set: isSet(hand)}")
 			td.col-doubler(ng-class="{doubler: hand.doubler}")
 			td.col-score(

@@ -12,14 +12,10 @@ module app {
 		misplayScore: IHandScoreMisplay;
 	}
 
-	export function ScoreHandCtrl(
-		$scope: IScoreHandScope,
-		scoreKeeperService: IScoreKeeperService,
-		screenService: IScreenService) {
-
+	function createHandInfo(data: any, playerCount: number): IHandInfo {
 		var handInfo: IHandInfo = {
-			outPlayers: screenService.data().outPlayers,
-			leadPlayerIndex: screenService.data().leadPlayerIndex,
+			outPlayers: [],
+			leadPlayerIndex: null,
 			doubler: false,
 			handType: HandType.normal,
 			normalScore: {
@@ -35,9 +31,46 @@ module app {
 			misplayScore: {
 				loserPlayerIndex: null
 			}
+		};
+
+		if (data.playerIndices != null)
+			handInfo.outPlayers = _.difference(_.range(0, playerCount-1), data.playerIndices);
+		if (data.leadPlayerIndex != null)
+			handInfo.leadPlayerIndex = data.leadPlayerIndex;
+		if (data.doubler != null)
+			handInfo.doubler = data.doubler;
+		if (data.handType != null)
+			handInfo.handType = data.handType;
+		if (data.handType === HandType.normal && data.score != null) {
+			if (data.score.win != null)
+				handInfo.normalScore.win = data.score.win;
+			if (data.score.scoreTier != null)
+				handInfo.normalScore.scoreTier = data.score.scoreTier;
+			if (data.score.pickerPlayerIndex != null)
+				handInfo.normalScore.pickerPlayerIndex = data.score.pickerPlayerIndex;
+			if (data.score.partnerPlayerIndex != null)
+				handInfo.normalScore.partnerPlayerIndex = data.score.partnerPlayerIndex;
 		}
-		if (handInfo.outPlayers == null)
-			handInfo.outPlayers = []
+		if (data.handType === HandType.leaster && data.score != null) {
+			if (data.score.primaryPlayerIndex != null)
+				handInfo.leasterScore.primaryPlayerIndex = data.score.primaryPlayerIndex;
+			if (data.score.secondaryPlayerIndex != null)
+				handInfo.leasterScore.secondaryPlayerIndex = data.score.secondaryPlayerIndex;
+		}
+		if (data.handType === HandType.misplay && data.score != null) {
+			if (data.score.loserPlayerIndex != null)
+				handInfo.misplayScore.loserPlayerIndex = data.score.loserPlayerIndex;
+		}
+
+		return handInfo;
+	}
+
+	export function ScoreHandCtrl(
+		$scope: IScoreHandScope,
+		scoreKeeperService: IScoreKeeperService,
+		screenService: IScreenService) {
+
+		var handInfo = createHandInfo(screenService.data(), scoreKeeperService.players.length);
 
 		function setNotOut(index: number) {
 			handInfo.outPlayers = _.without(handInfo.outPlayers, index);

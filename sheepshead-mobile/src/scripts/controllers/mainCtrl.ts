@@ -8,6 +8,7 @@ module app {
 		},
 		scoreList: {
 			addScore: "scoreList.addScore",
+			editScore: "scoreList.editScore",
 			submitFinalScores: "scoreList.submitFinalScores"
 		},
 		scoreHand: {
@@ -17,6 +18,13 @@ module app {
 			startNewGame: "scoresSubmitted.startNewGame"
 		}
 	};
+
+	enum ScoreHandAction {
+		add,
+		edit
+	}
+	var scoreHandAction: ScoreHandAction = null;
+	var editHandIndex: number = null;
 
 	export function MainCtrl(
 		$scope: ng.IScope,
@@ -34,11 +42,25 @@ module app {
 		});
 
 		$scope.$on(Event.scoreList.addScore, function (event: ng.IAngularEvent, parameters: any) {
+			scoreHandAction = ScoreHandAction.add;
 			screenService.push('scoreHand', parameters);
 		});
 
+		$scope.$on(Event.scoreList.editScore, function (event: ng.IAngularEvent, hand: IHand, index: number) {
+			scoreHandAction = ScoreHandAction.edit;
+			editHandIndex = index;
+			screenService.push('scoreHand', hand);
+		});
+
 		$scope.$on(Event.scoreHand.submitScore, function (event: ng.IAngularEvent, hand: IHand) {
-			scoreKeeperService.scoreHand(hand);
+			switch (scoreHandAction) {
+				case ScoreHandAction.add:
+					scoreKeeperService.scoreHand(hand);
+					break;
+				case ScoreHandAction.edit:
+					scoreKeeperService.updateHand(editHandIndex, hand);
+					break;
+			}
 			screenService.pop();
 		});
 
