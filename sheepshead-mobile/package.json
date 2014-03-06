@@ -9,22 +9,20 @@
   "homepage": "https://github.com/smrq/sheepshead-mobile",
   "dependencies": {
     "bower": "~1.2.8",
-    "brfs": "~0.2.1",
     "connect-livereload": "~0.3.2",
     "express": "~3.4.8",
     "graceful-fs": "~2.0.2",
-    "grunt": "~0.4.2",
-    "grunt-browserify": "~1.3.1",
-    "grunt-cli": "~0.1.13",
-    "grunt-contrib-clean": "~0.5.0",
-    "grunt-contrib-copy": "~0.5.0",
-    "grunt-contrib-jade": "~0.10.0",
-    "grunt-contrib-less": "~0.9.0",
-    "grunt-express": "~1.2.1",
-    "grunt-timer": "~0.3.1",
-    "grunt-typescript": "~0.2.8",
     "http-proxy": "~1.0.2",
-    "load-grunt-tasks": "~0.4.0",
-    "grunt-concat-sourcemap": "~0.4.1"
+    "gulp-exec": "~1.0.4",
+    "gulp-open": "~0.2.8",
+    "gulp-concat": "~2.1.7",
+    "gulp-util": "~2.2.14",
+    "gulp-livereload": "~1.2.0",
+    "gulp-watch": "~0.5.0",
+    "gulp": "~3.5.5",
+    "gulp-jade": "~0.4.2",
+    "gulp-less": "~1.2.2",
+    "gulp-if": "0.0.5",
+    "gulp-tsc": "~0.4.0"
   }
 }
