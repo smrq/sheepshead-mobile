@@ -65,9 +65,6 @@ module app {
 		};
 		$scope.nextOutAndLead = function () {
 			var nextOut = calculateNextOut($scope.hands, $scope.players.length);
-			if (nextOut == null)
-				return null;
-
 			var nextLead = calculateNextLead(nextOut, $scope.hands, $scope.players.length);
 
 			return {
@@ -103,7 +100,7 @@ module app {
 			var i = (lastLead + 1) % playerCount;
 			i !== lastLead;
 			i = (i + 1) % playerCount) {
-			if (nextOut.indexOf(i) === -1)
+			if (nextOut == null || nextOut.indexOf(i) === -1)
 				return i;
 		}
 		return null;

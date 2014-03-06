@@ -15,17 +15,17 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 				.btn-group
 					button.btn.score-button(ng-click="togglePicker($index)" ng-class="{toggled: isPicker($index), win: isWin()}") P
 					button.btn.score-button(ng-click="togglePartner($index)" ng-class="{toggled: isPartner($index), win: isWin()}") ∗
-				button.btn.score-button(ng-click="toggleOut($index)" ng-class="{toggled: isOut($index), win: isWin()}") Out
+				button.btn.score-button(ng-show="showOut" ng-click="toggleOut($index)" ng-class="{toggled: isOut($index), win: isWin()}") Out
 				button.btn.score-button(ng-click="toggleInLead($index)" ng-class="{toggled: isInLead($index), win: isWin()}") Lead
 			.player-buttons(ng-show="isLeaster()")
 				.btn-group
 					button.btn(ng-click="toggleLeasterPrimary($index)" ng-class="{toggled: isLeasterPrimary($index)}") L
 					button.btn.little-leaster(ng-click="toggleLeasterSecondary($index)" ng-class="{toggled: isLeasterSecondary($index)}") 2nd
-				button.btn(ng-click="toggleOut($index)" ng-class="{toggled: isOut($index)}") Out
+				button.btn(ng-show="showOut" ng-click="toggleOut($index)" ng-class="{toggled: isOut($index)}") Out
 				button.btn(ng-click="toggleInLead($index)" ng-class="{toggled: isInLead($index)}") Lead
 			.player-buttons(ng-show="isMisplay()")
 				button.btn(ng-click="toggleMisplayLoser($index)" ng-class="{toggled: isMisplayLoser($index)}") MP
-				button.btn(ng-click="toggleOut($index)" ng-class="{toggled: isOut($index) }") Out
+				button.btn(ng-show="showOut" ng-click="toggleOut($index)" ng-class="{toggled: isOut($index) }") Out
 				button.btn(ng-click="toggleInLead($index)" ng-class="{toggled: isInLead($index)}") Lead
 	.row(ng-show="isNormalGame()")
 		.col-xs-12: button.btn.win-button(ng-click="toggleWin()" ng-class="{win: isWin()}")

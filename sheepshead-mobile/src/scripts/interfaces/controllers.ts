@@ -2,6 +2,8 @@
 module app {
 	export interface ISelectPlayersScope extends ng.IScope {
 		players: { name: string }[];
+		addPlayer(): void;
+		enteredPlayers(): { name: string }[];
 		getNames(value: string): ng.IPromise<string[]>;
 		canSubmit(): boolean;
 		startGame(): void;
@@ -29,6 +31,7 @@ module app {
 
 	export interface IScoreHandScope extends ng.IScope {
 		players: IPlayer[];
+		showOut: boolean;
 		isNormalGame(): boolean;
 		isDoubler(): boolean;
 		toggleDoubler(): void;

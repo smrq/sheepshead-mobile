@@ -71,6 +71,7 @@ module app {
 		}
 
 		$scope.players = scoreKeeperService.players;
+		$scope.showOut = $scope.players.length > 5;
 		$scope.isNormalGame = function () {
 			return handInfo.handType === HandType.normal;
 		}

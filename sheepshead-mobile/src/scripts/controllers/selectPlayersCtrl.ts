@@ -2,22 +2,32 @@
 module app {
 	angular.module('app').controller('selectPlayersCtrl', SelectPlayersCtrl);
 	export function SelectPlayersCtrl(
-		$scope: app.ISelectPlayersScope,
-		scoreKeeperService: app.IScoreKeeperService,
-		screenService: app.IScreenService,
-		webService: app.IWebService) {
+		$scope: ISelectPlayersScope,
+		scoreKeeperService: IScoreKeeperService,
+		screenService: IScreenService,
+		webService: IWebService) {
 
-		$scope.players = _.repeat(() => ({ name: '' }), 6).map(f => f());
+		$scope.players = [];
+		$scope.addPlayer = function () {
+			$scope.players.push({name: ''});
+		}
+		$scope.enteredPlayers = function () {
+			return _.filter($scope.players, (p: { name: string }) => p.name.length > 0);
+		};
 		$scope.getNames = function (value: string) {
 			return webService.getNames(value);
 		};
 		$scope.canSubmit = function () {
-			return _.all($scope.players, (p: { name: string }) => p.name.length > 0);
+			return $scope.enteredPlayers().length >= 5;
 		};
 		$scope.startGame = function () {
-			var names = $scope.players.map((p) => p.name);
+			var names = $scope.enteredPlayers().map((p) => p.name);
 			scoreKeeperService.startGame(names);
 			screenService.replace('scoreList');
 		};
+
+		for (var i=0; i<6; i++) {
+			$scope.addPlayer();
+		}
 	}
 }
