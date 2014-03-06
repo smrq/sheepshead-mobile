@@ -92,6 +92,9 @@ module app {
 	}
 
 	function calculateNextLead(nextOut: number[], hands: IHand[], playerCount: number): number {
+		if (hands.length === 0)
+			return null;
+			
 		var lastLead = _.last(hands).leadPlayerIndex;
 		for (
 			var i = (lastLead + 1) % playerCount;
