@@ -3,8 +3,6 @@ module app {
 	angular.module('app').controller('selectPlayersCtrl', SelectPlayersCtrl);
 	export function SelectPlayersCtrl(
 		$scope: ISelectPlayersScope,
-		scoreKeeperService: IScoreKeeperService,
-		screenService: IScreenService,
 		webService: IWebService) {
 
 		$scope.players = [];
@@ -22,8 +20,7 @@ module app {
 		};
 		$scope.startGame = function () {
 			var names = $scope.enteredPlayers().map((p) => p.name);
-			scoreKeeperService.startGame(names);
-			screenService.replace('scoreList');
+			$scope.$emit(Event.selectPlayers.startGame, names);
 		};
 
 		for (var i=0; i<6; i++) {

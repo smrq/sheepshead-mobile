@@ -26,6 +26,7 @@ module app {
 		undoScore(): void;
 		hasAnyHands(): boolean;
 		submitFinalScores(): void;
+		submitFinalScoresCallback(button: number): void;
 		nextOutAndLead(): { outPlayers: number[]; leadPlayerIndex: number; };
 	}
 

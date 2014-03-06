@@ -3,8 +3,7 @@ module app {
 	angular.module('app').controller('scoresSubmittedCtrl', ScoresSubmittedCtrl);
 	export function ScoresSubmittedCtrl(
 		$scope: app.IScoresSubmittedScope,
-		scoreKeeperService: app.IScoreKeeperService,
-		screenService: app.IScreenService) {
+		scoreKeeperService: app.IScoreKeeperService) {
 
 		var players = scoreKeeperService.players;
 		var finalScores = scoreKeeperService.finalScores();
@@ -15,7 +14,7 @@ module app {
 			finalScores.cumulativeScores);
 
 		$scope.startNewGame = function () {
-			screenService.replace('');
+			$scope.$emit(Event.scoresSubmitted.startNewGame);
 		};
 	}
 }

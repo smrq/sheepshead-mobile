@@ -227,7 +227,7 @@ module app {
 			);
 		}
 		$scope.submitScore = function () {
-			scoreKeeperService.scoreHand({
+			var hand: IHand = {
 				playerIndices: _.difference(_.range(0, $scope.players.length-1), handInfo.outPlayers),
 				leadPlayerIndex: handInfo.leadPlayerIndex,
 				doubler: handInfo.doubler,
@@ -235,8 +235,8 @@ module app {
 				score: handInfo.handType === HandType.leaster ? handInfo.leasterScore :
 					handInfo.handType === HandType.misplay ? handInfo.misplayScore :
 					handInfo.normalScore
-			});
-			screenService.pop();
+			};
+			$scope.$emit(Event.scoreHand.submitScore, hand);
 		}
 	}
 }

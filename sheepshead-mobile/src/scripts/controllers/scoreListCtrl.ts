@@ -3,8 +3,7 @@ module app {
 	angular.module('app').controller('scoreListCtrl', ScoreListCtrl);
 	export function ScoreListCtrl(
 		$scope: IScoreListScope,
-		scoreKeeperService: IScoreKeeperService,
-		screenService: IScreenService) {
+		scoreKeeperService: IScoreKeeperService) {
 
 		$scope.players = scoreKeeperService.players;
 
@@ -49,7 +48,7 @@ module app {
 				(<IHandScoreMisplay>hand.score).loserPlayerIndex === index;
 		};
 		$scope.addScore = function () {
-			screenService.push('scoreHand', $scope.nextOutAndLead());
+			$scope.$emit(Event.scoreList.addScore, $scope.nextOutAndLead());
 		};
 		$scope.undoScore = function () {
 			scoreKeeperService.removeLastHand();
@@ -59,26 +58,24 @@ module app {
 		};
 		$scope.submitFinalScores = function () {
 			navigator.notification.confirm('Submit scores for this game?',
-				submitFinalScoresCallback,
+				$scope.submitFinalScoresCallback,
 				'Submit scores',
 				['Submit', 'Cancel']);
 		};
+		$scope.submitFinalScoresCallback = function (button) {
+			if (button !== 1) return;
+			$scope.$emit(Event.scoreList.submitFinalScores);
+		}
 		$scope.nextOutAndLead = function () {
 			var nextOut = calculateNextOut($scope.hands, $scope.players.length);
 			var nextLead = calculateNextLead(nextOut, $scope.hands, $scope.players.length);
-
 			return {
 				outPlayers: nextOut,
 				leadPlayerIndex: nextLead
 			};
 		}
-
-		function submitFinalScoresCallback(button: number): void {
-			if (button !== 1) return;
-			scoreKeeperService.submitScores();
-			screenService.replace('scoresSubmitted');
-		}
 	}
+
 	function calculateNextOut(hands: IHand[], playerCount: number): number[] {
 		if (hands.length === 0)
 			return null;
