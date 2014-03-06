@@ -1,32 +1,50 @@
 ﻿/// <reference path="../references.ts" />
 module app {
 	angular.module('app').controller('scoreHandCtrl', ScoreHandCtrl);
-	export function ScoreHandCtrl(
-		$scope: app.IScoreHandScope,
-		scoreKeeperService: app.IScoreKeeperService,
-		screenService: app.IScreenService) {
 
-		var handInfo = {
-			outPlayers: <number[]>(screenService.data().outPlayers || []),
+	interface IHandInfo {
+		outPlayers: number[];
+		leadPlayerIndex: number;
+		doubler: boolean;
+		handType: HandType;
+		normalScore: IHandScoreNormal;
+		leasterScore: IHandScoreLeaster;
+		misplayScore: IHandScoreMisplay;
+	}
+
+	export function ScoreHandCtrl(
+		$scope: IScoreHandScope,
+		scoreKeeperService: IScoreKeeperService,
+		screenService: IScreenService) {
+
+		var handInfo: IHandInfo = {
+			outPlayers: screenService.data().outPlayers,
+			leadPlayerIndex: screenService.data().leadPlayerIndex,
 			doubler: false,
-			handType: 'normal',
-			normalScore: <app.IHandScoreNormal>{
+			handType: HandType.normal,
+			normalScore: {
 				win: true,
 				scoreTier: null,
 				pickerPlayerIndex: null,
 				partnerPlayerIndex: null
 			},
-			leasterScore: <app.IHandScoreLeaster>{
+			leasterScore: {
 				primaryPlayerIndex: null,
 				secondaryPlayerIndex: null
 			},
-			misplayScore: <app.IHandScoreMisplay>{
+			misplayScore: {
 				loserPlayerIndex: null
 			}
 		}
+		if (handInfo.outPlayers == null)
+			handInfo.outPlayers = []
 
 		function setNotOut(index: number) {
 			handInfo.outPlayers = _.without(handInfo.outPlayers, index);
+		}
+		function setNotInLead(index: number) {
+			if (handInfo.leadPlayerIndex === index)
+				handInfo.leadPlayerIndex = null;
 		}
 		function setNotPicker(index: number) {
 			if (handInfo.normalScore.pickerPlayerIndex === index)
@@ -54,7 +72,7 @@ module app {
 
 		$scope.players = scoreKeeperService.players;
 		$scope.isNormalGame = function () {
-			return handInfo.handType === 'normal';
+			return handInfo.handType === HandType.normal;
 		}
 		$scope.isDoubler = function () {
 			return handInfo.doubler;
@@ -63,16 +81,16 @@ module app {
 			handInfo.doubler = !handInfo.doubler;
 		}
 		$scope.isLeaster = function () {
-			return handInfo.handType === 'leaster';
+			return handInfo.handType === HandType.leaster;
 		}
 		$scope.toggleLeaster = function () {
-			handInfo.handType = $scope.isLeaster() ? 'normal' : 'leaster';
+			handInfo.handType = $scope.isLeaster() ? HandType.normal : HandType.leaster;
 		}
 		$scope.isMisplay = function () {
-			return handInfo.handType === 'misplay';
+			return handInfo.handType === HandType.misplay;
 		}
 		$scope.toggleMisplay = function () {
-			handInfo.handType = $scope.isMisplay() ? 'normal' : 'misplay';
+			handInfo.handType = $scope.isMisplay() ? HandType.normal : HandType.misplay;
 		}
 		$scope.isPicker = function (index: number) {
 			return handInfo.normalScore.pickerPlayerIndex === index;
@@ -137,13 +155,26 @@ module app {
 				setNotOut(index);
 			} else {
 				handInfo.outPlayers.push(index);
-				if (playingPlayerCount() > 5)
+				if (playingPlayerCount() < 5)
 					handInfo.outPlayers.shift();
 				setNotPicker(index);
 				setNotPartner(index);
 				setNotLeasterPrimary(index);
 				setNotLeasterSecondary(index);
 				setNotMisplayLoser(index);
+				setNotInLead(index);
+			}
+		}
+		$scope.isInLead = function (index: number) {
+			return handInfo.leadPlayerIndex === index;
+		}
+		$scope.toggleInLead = function (index: number) {
+			if ($scope.isInLead(index)) {
+				handInfo.leadPlayerIndex = null
+			}
+			else {
+				handInfo.leadPlayerIndex = index;
+				setNotOut(index);
 			}
 		}
 		$scope.isWin = function () {
@@ -153,22 +184,22 @@ module app {
 			handInfo.normalScore.win = !handInfo.normalScore.win;
 		}
 		$scope.isNoTricker = function () {
-			return handInfo.normalScore.scoreTier === 'noTricker';
+			return handInfo.normalScore.scoreTier === ScoreTier.noTricker;
 		}
 		$scope.toggleNoTricker = function () {
-			handInfo.normalScore.scoreTier = $scope.isNoTricker() ? null : 'noTricker';
+			handInfo.normalScore.scoreTier = $scope.isNoTricker() ? null : ScoreTier.noTricker;
 		}
 		$scope.isNoSchneider = function () {
-			return handInfo.normalScore.scoreTier === 'noSchneider';
+			return handInfo.normalScore.scoreTier === ScoreTier.noSchneider;
 		}
 		$scope.toggleNoSchneider = function () {
-			handInfo.normalScore.scoreTier = $scope.isNoSchneider() ? null : 'noSchneider';
+			handInfo.normalScore.scoreTier = $scope.isNoSchneider() ? null : ScoreTier.noSchneider;
 		}
 		$scope.isSchneider = function () {
-			return handInfo.normalScore.scoreTier === 'schneider';
+			return handInfo.normalScore.scoreTier === ScoreTier.schneider;
 		}
 		$scope.toggleSchneider = function () {
-			handInfo.normalScore.scoreTier = $scope.isSchneider() ? null : 'schneider';
+			handInfo.normalScore.scoreTier = $scope.isSchneider() ? null : ScoreTier.schneider;
 		}
 		$scope.canSubmitNormalGame = function () {
 			return handInfo.normalScore.scoreTier != null &&
@@ -187,7 +218,8 @@ module app {
 				handInfo.outPlayers.indexOf(handInfo.misplayScore.loserPlayerIndex) === -1;
 		}
 		$scope.canSubmit = function () {
-			return playingPlayerCount() === 5 && (
+			return playingPlayerCount() === 5 &&
+				handInfo.leadPlayerIndex != null && (
 				$scope.isNormalGame() && $scope.canSubmitNormalGame() ||
 				$scope.isLeaster() && $scope.canSubmitLeaster() ||
 				$scope.isMisplay() && $scope.canSubmitMisplay()
@@ -196,11 +228,11 @@ module app {
 		$scope.submitScore = function () {
 			scoreKeeperService.scoreHand({
 				playerIndices: _.difference(_.range(0, $scope.players.length-1), handInfo.outPlayers),
-				leadPlayerIndex: (handInfo.outPlayers[0] + 1) % $scope.players.length, // shit logic
+				leadPlayerIndex: handInfo.leadPlayerIndex,
 				doubler: handInfo.doubler,
 				handType: handInfo.handType,
-				score: handInfo.handType === 'leaster' ? handInfo.leasterScore :
-					handInfo.handType === 'misplay' ? handInfo.misplayScore :
+				score: handInfo.handType === HandType.leaster ? handInfo.leasterScore :
+					handInfo.handType === HandType.misplay ? handInfo.misplayScore :
 					handInfo.normalScore
 			});
 			screenService.pop();

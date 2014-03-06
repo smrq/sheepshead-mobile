@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Charts — StatsHead</title>
+	<style>
+	*, *:before, *:after {
+  		-moz-box-sizing: border-box;
+  		-webkit-box-sizing: border-box;
+  		box-sizing: border-box;
+	}
+
+	a, a:visited {
+		text-decoration: none;
+		color: #37c3f7;
+	}
+
+	body {
+		font-family: "Alegreya Sans";
+		font-size: 16px;
+	}
+
+	.backdrop {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-image: url("fixed-bg.jpg");
+		background-size: cover;		
+	}
+
+	.wrapper {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}
+
+	.header {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 83px;
+		padding-top: 6px;
+	}
+	.header-trim {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 6px;
+		background-color: #5cb748;
+	}
+	.header-contents { /* width >= 874px; */
+		width: 844px;
+		height: 100%;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.header-logotype {
+		position: absolute;
+		width: 295px;
+		top: 13px;
+		bottom: 7px;
+		background-image: url("logotype.svg");
+		background-size: cover;
+	}
+	.header-menu {
+		margin-left: 313px; /* header-logotype width + 18px margin */
+		font-family: "Alegreya Sans SC";
+		display: inline-block;
+	}
+	a.header-menu-item, a.header-menu-item:visited {
+		display: inline-block;
+		line-height: 83px;
+		color: #5cb748;
+		padding-left: 18px;
+		padding-right: 18px;
+	}
+	.header-menu-item.selected {
+		border-left: 1px solid #efefef;
+		border-right: 1px solid #efefef;
+		border-bottom: 1px solid rgba(255,255,255,0.85);
+		background-color: rgba(255,255,255,0.85);
+		cursor: default;
+	}
+
+	.header-user {
+		float: right;
+		text-align: right;
+		padding-top: 22px;
+	}
+	.header-user-name { }
+	.header-user-logout {
+		display: block;
+		font-size: 14px;
+	}
+
+	.content { /* width >= 874px; */
+		width: 844px;
+		margin-left: auto;
+		margin-right: auto;
+		border: 1px solid #efefef;
+		background-color: rgba(255,255,255,0.85);
+		padding: 20px;
+		min-height: 100%; /* temporary */
+
+	}
+	.header + .content {
+		margin-top: 89px;
+	}
+	</style>
+</head>
+
+<body>
+<div class="backdrop"></div>
+<div class="wrapper">
+	<div class="header">
+		<div class="header-trim"></div>
+		<div class="header-contents">
+			<div class="header-logotype"></div>
+			<div class="header-menu">
+				<a href="#" class="header-menu-item selected">Charts</a>
+				<a href="#" class="header-menu-item">Statistics</a>
+				<a href="#" class="header-menu-item">Add Score</a>
+				<a href="#" class="header-menu-item">History</a>
+			</div>
+			<div class="header-user">
+				<div class="header-user-name">Greg Smith</div>
+				<a href="#" class="header-user-logout">Not you?</a>
+			</div>
+		</div>
+	</div>
+	<div class="content">
+		<object data="graph.svg" type="image/svg+xml" style="width: 700px; height: 300px;"></object>
+	</div>
+</div>
+</body>
+
+</html>

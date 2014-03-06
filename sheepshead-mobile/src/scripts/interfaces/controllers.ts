@@ -16,6 +16,7 @@ module app {
 		isPicker(hand: IScoreTableRow, index: number): boolean;
 		isPartner(hand: IScoreTableRow, index: number): boolean;
 		isOut(hand: IScoreTableRow, index: number): boolean;
+		isNotableLead(hand: IScoreTableRow, index: number): boolean;
 		isLeasterPrimary(hand: IScoreTableRow, index: number): boolean;
 		isLeasterSecondary(hand: IScoreTableRow, index: number): boolean;
 		isMisplayLoser(hand: IScoreTableRow, index: number): boolean;
@@ -23,7 +24,7 @@ module app {
 		undoScore(): void;
 		hasAnyHands(): boolean;
 		submitFinalScores(): void;
-		nextOut(): number[];
+		nextOutAndLead(): { outPlayers: number[]; leadPlayerIndex: number; };
 	}
 
 	export interface IScoreHandScope extends ng.IScope {
@@ -47,6 +48,8 @@ module app {
 		toggleMisplayLoser(index: number): void;
 		isOut(index: number): boolean;
 		toggleOut(index: number): void;
+		isInLead(index: number): boolean;
+		toggleInLead(index: number): void;
 		isWin(): boolean;
 		toggleWin(): void;
 		isNoTricker(): boolean;

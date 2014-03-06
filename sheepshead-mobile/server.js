@@ -16,6 +16,4 @@ app.all('/sheepshead.cgi', function (req, res) {
 });
 app.use(express.static(path.join(__dirname, BUILD_FOLDER)));
 
-console.log(app);
-
 module.exports = app;

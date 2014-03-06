@@ -9,7 +9,7 @@ module app {
 		hands: IHand[] = [];
 
 		startGame(names: string[]): void {
-			this.players = names.map(n => ({ name: n, abbreviation: abbreviate(n) }));
+			this.players = names.map(n => new Player(n));
 			this.hands = []
 			this.saveState();
 		}
@@ -76,13 +76,6 @@ module app {
 		}
 	}
 
-	function abbreviate(name: string): string {
-		return name.split(' ')
-			.map(word => word[0])
-			.join('')
-			.toUpperCase();
-	}
-
 	function calculatePointSpread(scores: number[]): number {
 		var positivePointSpread = _.sum(_.filter(scores, (s) => s > 0));
 		var negativePointSpread = _.sum(_.filter(scores, (s) => s < 0));
@@ -97,7 +90,7 @@ module app {
 		var pointsPaid = 1;
 
 		switch (hand.handType) {
-			case 'normal':
+			case HandType.normal:
 				var normalScore = <IHandScoreNormal>hand.score;
 				var offenseShares = normalScore.pickerPlayerIndex === normalScore.partnerPlayerIndex
 					? _.repeat(normalScore.pickerPlayerIndex, 4)
@@ -117,16 +110,16 @@ module app {
 				}
 
 				switch (normalScore.scoreTier) {
-					case 'noSchneider':
+					case ScoreTier.noSchneider:
 						pointsPaid *= 2;
 						break;
-					case 'noTricker':
+					case ScoreTier.noTricker:
 						pointsPaid *= 3;
 						break;
 				}
 				break;
 
-			case 'leaster':
+			case HandType.leaster:
 				var leasterScore = <IHandScoreLeaster>hand.score;
 				winningShares = leasterScore.secondaryPlayerIndex == null
 					? _.repeat(leasterScore.primaryPlayerIndex, 4)
@@ -137,7 +130,7 @@ module app {
 					leasterScore.secondaryPlayerIndex);
 				break;
 
-			case 'misplay':
+			case HandType.misplay:
 				var misplayScore = <IHandScoreMisplay>hand.score;
 				losingShares = _.repeat(misplayScore.loserPlayerIndex, 4);
 				winningShares = _.without(

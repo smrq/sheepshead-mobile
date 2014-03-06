@@ -10,7 +10,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 		thead: tr
 			th.col-doubler
 			th.col-score(ng-repeat="player in players")
-				| {{player.abbreviation}}
+				| {{player.shorterName}}
 			th.point-spread PS
 
 		tbody: tr(
@@ -23,6 +23,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 					'picker': isPicker(hand, $index), \
 					'partner': isPartner(hand, $index), \
 					'out': isOut(hand, $index), \
+					'in-lead': isNotableLead(hand, $index), \
 					'leaster-primary': isLeasterPrimary(hand, $index), \
 					'leaster-secondary': isLeasterSecondary(hand, $index), \
 					'misplay': isMisplayLoser(hand, $index) \
@@ -33,7 +34,7 @@ nav.navbar.navbar-default.navbar-fixed-bottom: .container
 		tfoot: tr
 			th.col-doubler
 			th.col-score(ng-repeat="player in players")
-				| {{player.abbreviation}}
+				| {{player.shorterName}}
 			th.point-spread PS
 
 	.row

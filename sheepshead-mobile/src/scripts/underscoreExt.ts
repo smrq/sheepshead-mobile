@@ -4,7 +4,7 @@ module app {
 		findObj: function (obj: any, pred: (value: any) => boolean): string {
 			var kv = _.find(
 				_.pairs(obj),
-				(p) => pred(p[1]));
+				(p: any[]) => pred(p[1]));
 			return kv == null ? null : kv[0];
 		},
 
@@ -17,7 +17,7 @@ module app {
 		},
 
 		repeat: function <T>(item: T, times: number): T[] {
-			var result = [];
+			var result: T[] = [];
 			for (var i = 0; i < times; ++i) {
 				result.push(item);
 			}
@@ -38,7 +38,7 @@ module app {
 		},
 
 		range: function (from: number, to: number): number[] {
-			var result = [];
+			var result: number[] = [];
 			if (from < to)
 				for (var n = from; n <= to; ++n) {
 					result.push(n);

@@ -1,6 +1,6 @@
 {
   "version": "v4",
-  "repo": "borisyankov/DefinitelyTyped",
+  "repo": "smrq/DefinitelyTyped",
   "ref": "master",
   "path": "typings",
   "bundle": "typings/tsd.d.ts",
@@ -27,7 +27,7 @@
       "commit": "0854df3b0f7187ae445453aaad2563a97b70df08"
     },
     "phonegap/phonegap.d.ts": {
-      "commit": "0854df3b0f7187ae445453aaad2563a97b70df08"
+      "commit": "c52554f9b9a0db21431d7f0001bf663966a82157"
     }
   }
 }

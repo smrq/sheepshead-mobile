@@ -2,9 +2,9 @@
 module app {
 	angular.module('app').controller('scoreListCtrl', ScoreListCtrl);
 	export function ScoreListCtrl(
-		$scope: app.IScoreListScope,
-		scoreKeeperService: app.IScoreKeeperService,
-		screenService: app.IScreenService) {
+		$scope: IScoreListScope,
+		scoreKeeperService: IScoreKeeperService,
+		screenService: IScreenService) {
 
 		$scope.players = scoreKeeperService.players;
 
@@ -13,63 +13,126 @@ module app {
 			$scope.hands = scoreKeeperService.scoreTable()
 		});
 
-		$scope.isWin = function (hand: app.IScoreTableRow): boolean {
-			return hand.handType === 'normal' &&
-				(<app.IHandScoreNormal>hand.score).win;
+		$scope.isWin = function (hand) {
+			return hand.handType === HandType.normal &&
+				(<IHandScoreNormal>hand.score).win;
 		};
-		$scope.isSet = function (hand: app.IScoreTableRow): boolean {
-			return hand.handType === 'normal' &&
-				!(<app.IHandScoreNormal>hand.score).win;
+		$scope.isSet = function (hand) {
+			return hand.handType === HandType.normal &&
+				!(<IHandScoreNormal>hand.score).win;
 		};
-		$scope.isPicker = function (hand: app.IScoreTableRow, index: number): boolean {
-			return hand.handType === 'normal' &&
-				(<app.IHandScoreNormal>hand.score).pickerPlayerIndex === index;
+		$scope.isPicker = function (hand, index) {
+			return hand.handType === HandType.normal &&
+				(<IHandScoreNormal>hand.score).pickerPlayerIndex === index;
 		};
-		$scope.isPartner = function (hand: app.IScoreTableRow, index: number): boolean {
-			return hand.handType === 'normal' &&
-				(<app.IHandScoreNormal>hand.score).partnerPlayerIndex === index;
+		$scope.isPartner = function (hand, index) {
+			return hand.handType === HandType.normal &&
+				(<IHandScoreNormal>hand.score).partnerPlayerIndex === index;
 		};
-		$scope.isOut = function (hand: app.IScoreTableRow, index: number): boolean {
+		$scope.isOut = function (hand, index) {
 			return hand.playerIndices.indexOf(index) === -1;
 		};
-		$scope.isLeasterPrimary = function (hand: app.IScoreTableRow, index: number): boolean {
-			return hand.handType === 'leaster' &&
-				(<app.IHandScoreLeaster>hand.score).primaryPlayerIndex === index;
+		$scope.isNotableLead = function (hand, index) {
+			return hand.leadPlayerIndex === index &&
+				index !== automaticallyCalculatedLead(hand, $scope.players.length);
+		}
+		$scope.isLeasterPrimary = function (hand, index) {
+			return hand.handType === HandType.leaster &&
+				(<IHandScoreLeaster>hand.score).primaryPlayerIndex === index;
 		};
-		$scope.isLeasterSecondary = function (hand: app.IScoreTableRow, index: number): boolean {
-			return hand.handType === 'leaster' &&
-				(<app.IHandScoreLeaster>hand.score).secondaryPlayerIndex === index;
+		$scope.isLeasterSecondary = function (hand, index) {
+			return hand.handType === HandType.leaster &&
+				(<IHandScoreLeaster>hand.score).secondaryPlayerIndex === index;
 		};
-		$scope.isMisplayLoser = function (hand: app.IScoreTableRow, index: number): boolean {
-			return hand.handType === 'misplay' &&
-				(<app.IHandScoreMisplay>hand.score).loserPlayerIndex === index;
+		$scope.isMisplayLoser = function (hand, index) {
+			return hand.handType === HandType.misplay &&
+				(<IHandScoreMisplay>hand.score).loserPlayerIndex === index;
 		};
-		$scope.addScore = function (): void {
-			screenService.push('scoreHand', { outPlayers: $scope.nextOut() });
+		$scope.addScore = function () {
+			screenService.push('scoreHand', $scope.nextOutAndLead());
 		};
-		$scope.undoScore = function (): void {
+		$scope.undoScore = function () {
 			scoreKeeperService.removeLastHand();
 		};
-		$scope.hasAnyHands = function (): boolean {
+		$scope.hasAnyHands = function () {
 			return $scope.hands.length > 0;
 		};
-		$scope.submitFinalScores = function (): void {
+		$scope.submitFinalScores = function () {
 			navigator.notification.confirm('Submit scores for this game?',
 				submitFinalScoresCallback,
 				'Submit scores',
 				['Submit', 'Cancel']);
 		};
-		function submitFinalScoresCallback(button: number) {
+		$scope.nextOutAndLead = function () {
+			var nextOut = calculateNextOut($scope.hands, $scope.players.length);
+			if (nextOut == null)
+				return null;
+
+			var nextLead = calculateNextLead(nextOut, $scope.hands, $scope.players.length);
+
+			return {
+				outPlayers: nextOut,
+				leadPlayerIndex: nextLead
+			};
+		}
+
+		function submitFinalScoresCallback(button: number): void {
 			if (button !== 1) return;
 			scoreKeeperService.submitScores();
 			screenService.replace('scoresSubmitted');
 		}
-		$scope.nextOut = function (): number[]{
-			if (!$scope.hasAnyHands()) return null;
-			var lastHand = _.last($scope.hands);
-			var lastOut = _.difference(_.range(0, $scope.players.length - 1), lastHand.playerIndices);
-			if (lastOut.length !== 1) return null;
-			return [(lastOut[0] + 1) % $scope.players.length];
-		};
+	}
+	function calculateNextOut(hands: IHand[], playerCount: number): number[] {
+		if (hands.length === 0)
+			return null;
+
+		var playersOut = _.last(hands, 2).map(hand => missingIndices(hand.playerIndices, playerCount))
+
+		if (playersOut.length === 1)
+			return shiftIndices(playersOut[0], playerCount);
+
+		if (_.isEqual(playersOut[1], playersOut[0]))
+			return playersOut[1];
+
+		return shiftIndices(playersOut[1], playerCount);
+	}
+
+	function calculateNextLead(nextOut: number[], hands: IHand[], playerCount: number): number {
+		var lastLead = _.last(hands).leadPlayerIndex;
+		for (
+			var i = (lastLead + 1) % playerCount;
+			i !== lastLead;
+			i = (i + 1) % playerCount) {
+			if (nextOut.indexOf(i) === -1)
+				return i;
+		}
+		return null;
+	}
+
+	function automaticallyCalculatedLead(hand: IScoreTableRow, playerCount: number): number {
+		if (playerCount < 6)
+			return null;
+		var playersOut = missingIndices(hand.playerIndices, playerCount);
+		if (!areIndicesCyclicallyContiguous(playersOut, playerCount))
+			return null;
+		var lastPlayerOut = playersOut.filter(i => playersOut.indexOf((i+1) % playerCount) === -1)[0];
+		return (lastPlayerOut+1) % playerCount;
+	}
+
+	function missingIndices(indices: number[], indexBound: number): number[] {
+		return _.difference(_.range(0, indexBound - 1), indices);
+	}
+
+	function shiftIndices(indices: number[], indexBound: number): number[] {
+		if (!areIndicesCyclicallyContiguous(indices, indexBound))
+			return null;
+		return indices.map(i => (i+1) % indexBound);
+	}
+
+	function areIndicesCyclicallyContiguous(indices: number[], indexBound: number): boolean {
+		var indicesWithoutPredecessorInList = indices.filter(i => indices.indexOf((i-1+indexBound) % indexBound) === -1);
+		var indicesWithoutSuccessorInList = indices.filter(i => indices.indexOf((i+1) % indexBound) === -1);
+		return indicesWithoutPredecessorInList.length === 1 &&
+			indicesWithoutSuccessorInList.length === 1;
 	}
 }
