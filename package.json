@@ -8,7 +8,7 @@
   "license": "MIT",
   "homepage": "https://github.com/smrq/sheepshead-mobile",
   "devDependencies": {
-    "bower": "~1.2.8",
+    "bower": "~1.8.8",
     "coffeeify": "~0.6.0",
     "connect-livereload": "~0.3.2",
     "debowerify": "~0.5.2",
